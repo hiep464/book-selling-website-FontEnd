@@ -1,0 +1,50 @@
+.block-subscribe {
+    // font-size: 13px;
+    font-weight: 400;
+    line-height: 1.428571429;
+    display: flex;
+    align-items: center;
+    margin: 3rem 3rem;
+}
+
+.block-subscribe-title{
+    display: flex;
+    align-items: center;  
+    margin: 0 3rem;  
+}
+
+.block-input{
+    // margin: 0 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.search{
+    height: 40px;
+    // width: calc(100% - 300px);
+    min-width: 5rem;
+    display: flex;
+    margin-right: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    button{
+        width: 72px;
+        border: none;
+        border-radius: 4px;
+    }
+}
+
+.email-input{
+    padding-left: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+}
+
+.logo{
+    width: 216px;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
