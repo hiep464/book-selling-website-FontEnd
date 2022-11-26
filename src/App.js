@@ -1,35 +1,33 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {publicRoutes} from './routes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from './routes';
 import DefaultLayout from './components/Layout/DefaultLayout';
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {
-            publicRoutes.map((route, index) => {
-              const Page = route.component
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
 
-              let Layout = DefaultLayout
+                        let Layout = DefaultLayout;
 
-              return(
-                <Route 
-                  key={index}
-                  path={route.path}
-                  element={
-                    <Layout>
-                      <Page/>
-                    </Layout>
-                  }>
-                </Route>
-              )
-            })
-          }
-        </Routes>
-      </div>
-    </Router>
-  );
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            ></Route>
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

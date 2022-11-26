@@ -1,0 +1,34 @@
+.container{
+    width: 210px;
+    background-color: white;
+    margin: 0 10px;
+    padding: 10px 0;
+
+    &:hover{
+        box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%);
+    }
+}
+.image{
+    width: 190px;
+    height: 190px;
+    background-color: red;
+    margin: auto;
+}
+
+.price-volume{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.price{
+
+}
+
+.volume{
+
+}
+
+.color{
+    color: #e3e5e5;
+}
