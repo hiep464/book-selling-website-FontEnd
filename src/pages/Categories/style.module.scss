@@ -1,9 +1,22 @@
+.wrapper > header{
+    text-align: left;
+}
+
+.header{
+    margin: 5px 0;
+}
+
+.header-icon{
+    font-size: 14px;
+    margin: 0 2px;
+}
+
 .container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
+//content left
 .content-left {
     width: 270px;
     background-color: bisque;
@@ -13,7 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 5px;
+    padding: 5px 0;
 
     span {
         margin-left: 5px;
@@ -25,16 +38,6 @@ td {
     float: left;
 }
 
-.content-right {
-    width: 920px;
-    background-color: white;
-}
-
-.content-right-header {
-    margin-top: 20px;
-    text-align: left;
-    margin-left: 10px;
-}
 
 .menu-list {
     list-style-type: none;
@@ -45,16 +48,17 @@ td {
     }
 }
 
-.price {
-    margin: 0 10px;
+.price, .age {
+    margin: 0 14px;
+    padding: 14px 0;
     text-align: left;
     border-top: 1px solid #ccc;
 }
 
-.products-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.content-left-footer{
+    margin: 0 10px;
+    border-top: 1px solid #ccc;
+    height: 30px;
 }
 
 tr{
@@ -63,4 +67,50 @@ tr{
 
 td{
     margin: 0 5px;
+}
+
+// content right
+.content-right {
+    width: 920px;
+    background-color: white;
+}
+
+.content-right-header {
+    text-align: left;
+    margin:20px 0 20px 10px;
+
+    select{
+        padding: 5px;
+        border-radius: 4px;
+        margin-left: 4px;
+    }
+}
+
+.products-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.content-right-footer{
+    padding: 18px 0;
+}
+
+.number-page{
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 4px;
+    background-color: white;
+
+    &:hover{
+        background-color: #fcdab0;
+    }
+}
+
+.active{
+    background-color: #C92127;
+    color: white;
 }

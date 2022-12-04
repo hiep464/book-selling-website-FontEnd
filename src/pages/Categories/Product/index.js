@@ -10,12 +10,12 @@ function Item() {
             <div className={cx('image')}>
                 {/* <image src="https://cdn0.fahasa.com/media/catalog/product/k/o/komi-nu-than-so-giao-tiep---tap-11.jpg" alt="Item"/> */}
             </div>
-            <span className={cx('title')}>
+            <h4 className={cx('title')}>
                 Title
-            </span>
+            </h4>
             <div className={cx('price-volume')}>
-                <span className={cx('price')}>10,000d</span>
-                <span className={cx('volume')}>tap 14</span>
+                <span className={cx('price')}>Price</span>
+                <span className={cx('volume')}>volume</span>
             </div>
             <div className={cx('star')}>
                 <FontAwesomeIcon className={cx('color')} icon={faStar}/>
@@ -23,6 +23,7 @@ function Item() {
                 <FontAwesomeIcon className={cx('color')} icon={faStar}/>
                 <FontAwesomeIcon className={cx('color')} icon={faStar}/>
                 <FontAwesomeIcon className={cx('color')} icon={faStar}/>
+                <span>(sold)</span>
             </div>
         </div>
     );

@@ -8,6 +8,12 @@
         box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%);
     }
 }
+
+.title{
+    margin: 0 10px;
+    text-align: left;
+}
+
 .image{
     width: 190px;
     height: 190px;
@@ -16,17 +22,15 @@
 }
 
 .price-volume{
+    margin: 0 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.price{
-
-}
-
-.volume{
-
+.star{
+    margin: 0 10px;
+    float: left;
 }
 
 .color{
