@@ -48,3 +48,73 @@
     font-weight: 600;
     font-size: 1.6rem;
 }
+
+.footer-contain{
+    display: flex;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-left{
+    width: 33%;
+    width: 33%;
+    border-right: 1px solid black;
+    margin: 24px;
+}
+
+.sub-title{
+    text-transform: uppercase;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.address{
+    font-size: 13px;
+}
+
+.media-list {
+    display: flex;
+    align-items: center;
+}
+
+.media{
+    width: 30px;
+    height: 30px;
+    margin: 12px;
+}
+
+.footer-right{
+    // width: 66%;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.footer-right-head{
+    display: flex;
+    
+}
+
+.service ul li {
+    border-color: gray;
+    color: black;
+    font-size: 13px !important;
+}
+
+.list{
+    font-size: 13px;
+    line-height: 30px;
+}
+
+.sub-contain {
+    margin: 30px !important;
+}
+
+.service, .support, .my-account {
+    margin: 30px !important;
+} 
