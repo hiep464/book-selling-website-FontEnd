@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTrendUp, faBell, faCartShopping, faList, faLock, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
+import LoginItem from '../../../pages/Login/LoginItem';
 
 const cx = classNames.bind(styles);
 
@@ -16,9 +17,11 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
-                    <span>H3.com</span>
-                </div>
+                <Link to="/" style={{textDecoration: 'none'}}>
+                    <div className={cx('logo')}>
+                        <span>H3.com</span>
+                    </div>
+                </Link>
                 <div className={cx('menu')}>
                     <Link to="/categories">
                         <FontAwesomeIcon className={cx('menu-icon')} icon={faList} />
@@ -127,37 +130,18 @@ function Header() {
                             </div>
                         )}
                     >
-                        <div className={cx('account', 'common')}>
-                            <FontAwesomeIcon icon={faUser} />
-                            <span>Tài khoản</span>
-                        </div>
+                        <Link to="/login" style={{textDecoration : 'none'}}>
+                            <div className={cx('account', 'common')}>
+                                <FontAwesomeIcon icon={faUser} />
+                                <span>Tài khoản</span>
+                            </div>
+                        </Link>
                     </HeadlessTippy>
                 </div>
             </div>
+            {/* hiển thị khi ấn vào nút login or register */}
             <div className={cx('form-wrap')}>
-                <div className={cx('form')}>
-                    <header className={cx('form-header')}>
-                        <btn className={cx('form-header-register', 'active')}>Đăng ký</btn>
-                        <btn className={cx('form-header-login')}>Đăng nhập</btn>
-                    </header>
-                    <div className={cx('register')}>
-                            <form className={cx('register-form')}>
-                                <div className={cx('register-account')}>
-                                    <span>So Dien Thoai/ email</span>
-                                    <input type='text' className={cx('phone-email')}/>
-                                </div>
-                                <div className={cx('register-login')}>
-                                    <span>Mat khau</span>
-                                    <input type='password' className={cx('password')}/>
-                                </div>
-                            </form>
-                            <a href="/#">Quen mat khau</a>
-                            <div className={cx('register-btn')}>
-                                <button>Dang nhap</button>
-                                <button>Bo qua</button>
-                            </div>
-                    </div>
-                </div>
+                <LoginItem/>
             </div>
         </header>
     );
