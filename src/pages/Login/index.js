@@ -1,13 +1,22 @@
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import LoginItem from './LoginItem';
+import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    const data = useLocation();
+    console.log(data);
+    let login;
+    if(data.state){
+        login = data.state.login;
+    }else{
+        login = true;
+    }
     return (
         <div className={cx('form-wrap')}>
-            <LoginItem/>
+            <LoginItem data = {login}/>
         </div>
     );
 }

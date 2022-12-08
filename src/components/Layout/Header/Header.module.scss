@@ -14,7 +14,7 @@
 
 .logo {
     width: 216px;
-    margin: 0 38px 0 20px;
+    margin: 0 38px 0 0;
     font-weight: 600;
     font-size: 1.6rem;
     text-decoration: none;
@@ -38,7 +38,7 @@
     height: 40px;
     width: calc(100% - 619px);
     display: flex;
-    margin-right: 16px;
+    margin-right: auto;
     border: 1px solid #ccc;
     border-radius: 6px;
     align-items: center;
@@ -66,6 +66,10 @@
 .search-result {
     width: calc(1263px - 619px);
     background-color: white;
+}
+
+.search-result-icon{
+    margin: 0 5px;
 }
 
 .search-result1-menu{
@@ -105,15 +109,21 @@
     text-align: center;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 0 16px;
     cursor: pointer;
     color: #7a7e7f;
 
     span {
         margin-top: 4px;
-        font-size: 1.2rem;
-        font-weight: 400;
+        font-size: 1.25rem;
+        font-weight: 500;
     }
+}
+
+.icon-size{
+    height: 20px;
+    width: 20px;
 }
 
 .account-btn {
@@ -220,4 +230,141 @@
     display: none;
     align-items: center;
     justify-content: center;
+}
+
+.disable{
+    display: none;
+}
+
+// USER LOGIN
+//account
+.account-logined{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 290px;
+    border-radius: 6px;
+    box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
+}
+
+.account-logined-wrapper{
+    width: 100%;
+}
+
+.account-logined-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #ccc;
+    }
+}
+
+.header-left-icon{
+    width: 40px;
+    height: 40px;
+    color: burlywood;
+    margin: 0 10px;
+}
+
+.header-left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-left-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 50px;
+
+    h5{
+        font-weight: 400;
+    }
+}
+
+.header-right{
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.account-logined-item-wrapper{
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #ccc;
+    }
+}
+
+.account-logined-item{
+    display: flex;
+    align-items: center;
+    padding: 10px 0 8px 14px;
+
+    .account-logined-item-icon{
+        margin: 0 8px;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+//ghi de
+.no-border{
+    border-bottom: none;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding-bottom: 1px;
+}
+
+.no-margin-right{
+    margin-right: 0;
+}
+
+//thong bao
+.notification-display-user{
+    width: 260px;
+    background-color: white;
+    box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
+    border-radius: 4px;
+}
+
+.notification-display-user-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+
+
+    h5{
+        font-size: 1.5rem;
+    }
+    span{
+        font-size: 1.2rem;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+}
+
+.user-header-right{
+    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .user-header-right-icon{
+        margin-right: 4px;
+        width: 14px;
+        height: 14px;
+    }
 }

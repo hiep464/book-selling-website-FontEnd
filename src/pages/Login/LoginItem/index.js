@@ -4,20 +4,25 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function LoginItem() {
+function LoginItem(data) {
 
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(data.data);
     const addActive = () => setActive(true);
     const remoteActive = () => setActive(false);
-
-    // const act = 'active';
+    console.log(data.data);
     
+    const [forget, setForget] = useState(false);
+    const addForget = () => setForget(true);
+    const remoteFroget = () => setForget(false);
     return ( 
         <div className={cx('form')}>
+            {forget ? 
+            <header className={cx('form-header-forget')}>Khôi phục mật khẩu</header>
+            :
             <header className={cx('form-header')}>
                 <button className={cx('form-header-register', active ? 'active' : '')} onClick={addActive} >Đăng nhập</button>
                 <button className={cx('form-header-login', active ? '' : 'active')} onClick={remoteActive}>Đăng ký</button>
-            </header>
+            </header>}
             <div className={cx('register')}>
                 <form className={cx('register-form')}>
                     <div className={cx('account')}>
@@ -25,20 +30,27 @@ function LoginItem() {
                         <input type="text" className={cx('phone-email')} />
                     </div>
                     <div className={cx('pass')}>
-                        <h4>Mật khẩu :</h4>
+                        <h4>{forget ? 'Mật khẩu mới :' : 'Mật khẩu:'}</h4>
                         <input type="password" className={cx('password')} />
                     </div>
                     {active ? '':
                         <div className={cx('pass-check')}>
-                            <h4>Xác nhận mật khẩu :</h4>
+                            <h4>{forget ? 'Xác nhận mật khẩu mới :' : 'Xác nhận mật khẩu :'}</h4>
                             <input type="password" className={cx('password')} />
                         </div>
                     }
+                    {forget ?
+                        (<div className={cx('newpass-check')}>
+                        <h4>Xác nhận mật khẩu :</h4>
+                        <input type="password" className={cx('password')} />
+                        </div>) :
+                        ''
+                    }
                 </form>
-                {active ? <a href="/#">Quên mật khẩu?</a> : ''}
+                {((active === true) && (forget === false))  ? <button onClick={addForget}>Quên mật khẩu?</button> : ''}
                 <div className={cx('register-btn')}>
-                    <button>{active ? 'Đăng nhập' : 'Đăng ký'}</button>
-                    <button>Bỏ qua</button>
+                    <button>{forget ? 'Xác nhận' : active ? 'Đăng nhập' : 'Đăng ký'}</button>
+                    {forget ? <button onClick={remoteFroget}>Quay lại</button> : ''}
                 </div>
             </div>
         </div>
