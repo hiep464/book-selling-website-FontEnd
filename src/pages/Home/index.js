@@ -5,8 +5,8 @@ const cx = classNames.bind(style);
 
 function Home() {
     return (
-        <main className={cx('container')}>
-            <div className={cx('homepage-advertise', 'row')}>
+        <main className={cx('homepage')}>
+            <div className={cx('homepage-advertise', 'row', 'container')}>
                 <div className={cx('homepage-advertise-left', 'col-md-8')}>
                     <div className={cx('homepage-carousel')}>
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -38,6 +38,7 @@ function Home() {
                                         src={require('../../assets/images/homepage_imgs/BitexT12_840x320.jpg')}
                                         class="d-block w-100"
                                         alt="..."
+                                        className={cx('img-border')}
                                     ></img>
                                 </div>
                                 <div class="carousel-item">
@@ -45,6 +46,7 @@ function Home() {
                                         src={require('../../assets/images/homepage_imgs/Megasale_Mainbanner_T12_Slide_840x320_Icanconnect.jpg')}
                                         class="d-block w-100"
                                         alt="..."
+                                        className={cx('img-border')}
                                     ></img>
                                 </div>
                                 <div class="carousel-item">
@@ -52,6 +54,7 @@ function Home() {
                                         src={require('../../assets/images/homepage_imgs/McBooksT12_840x320.jpg')}
                                         class="d-block w-100"
                                         alt="..."
+                                        className={cx('img-border')}
                                     ></img>
                                 </div>
                             </div>
@@ -77,18 +80,37 @@ function Home() {
                     </div>
                 </div>
                 <div className={cx('homepage-advertise-right', 'col-md-4')}>
-                    <div className={cx('advertise-right-img')}>
-                        <img
-                            className={cx('right-img')}
-                            src={require('../../assets/images/homepage_imgs/up-right.jpg')}
-                        ></img>
+                    <div>
+                        <div className={cx('advertise-right-img')}>
+                            <img
+                                className={cx('right-img', 'img-border')}
+                                src={require('../../assets/images/homepage_imgs/up-right.jpg')}
+                                alt=""
+                            ></img>
+                        </div>
+                        <div className={cx('advertise-right-img')}>
+                            <img
+                                className={cx('right-img', 'img-border', 'bottom-img')}
+                                src={require('../../assets/images/homepage_imgs/bottom-right.png')}
+                                alt=""
+                            ></img>
+                        </div>
                     </div>
-                    <div className={cx('advertise-right-img')}>
-                        <img
-                            className={cx('right-img')}
-                            src={require('../../assets/images/homepage_imgs/bottom-right.png')}
-                        ></img>
-                    </div>
+                </div>
+            </div>
+
+            <div className={cx('coupon')}>
+                <div>
+                    <img src={require('../../assets/images/homepage_imgs/coupon1.png')} alt=""></img>
+                </div>
+                <div>
+                    <img src={require('../../assets/images/homepage_imgs/coupon2.png')} alt=""></img>
+                </div>
+                <div>
+                    <img src={require('../../assets/images/homepage_imgs/coupon3.png')} alt=""></img>
+                </div>
+                <div>
+                    <img src={require('../../assets/images/homepage_imgs/coupon4.png')} alt=""></img>
                 </div>
             </div>
         </main>

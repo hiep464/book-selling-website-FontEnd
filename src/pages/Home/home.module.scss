@@ -1,9 +1,33 @@
+.homepage{
+    margin-top: 20px;
+
+}
+
+.homepage-carousel{
+
+}
+
+.img-border {
+    border-radius: 8px;
+}
+
 .homepage-advertise{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 !important;
+    margin: 0 !important;
 
 }
 
 .homepage-advertise-left{
+    padding: 0 !important;
 
+}
+
+.homepage-advertise-right{
+    padding: 0 !important;
+    display: contents;
 }
 
 .advertise-right-img{
@@ -11,5 +35,22 @@
 }
 
 .right-img{
-    padding-top: 15px;
+}
+
+.bottom-img{
+    padding-top: 8px;
+}
+
+.coupon{
+    
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 26px;
+}
+
+.coupon > div > img {
+    // width: 95%;
 }
