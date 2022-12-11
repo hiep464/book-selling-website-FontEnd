@@ -1,11 +1,8 @@
 .homepage{
     margin-top: 20px;
-
 }
 
-.homepage-carousel{
 
-}
 
 .img-border {
     border-radius: 8px;
@@ -51,6 +48,60 @@
     margin-top: 26px;
 }
 
-.coupon > div > img {
-    // width: 95%;
+.category{
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 26px;
+}
+
+.category-title{
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #212121;
+    letter-spacing: 0px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgb(211, 211, 211);
+}
+
+.category-title > span {
+    margin-left: 1.6rem;
+}
+
+.category-icon{
+    color: #c92127;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.category-lists{
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.category-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-item > a {
+    font-size: 1.7em;
+    text-decoration: none;
+    color: #646464;
+    transition: 0.5s;
+}
+
+.category-item > a> p {
+    margin-top: 1.2rem;
+}
+
+.category-item > a:hover {
+    color: #c92127;
 }

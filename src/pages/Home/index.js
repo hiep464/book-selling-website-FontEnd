@@ -1,7 +1,11 @@
 import style from './home.module.scss';
 import classNames from 'classnames/bind';
+import { faListUl } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const cx = classNames.bind(style);
+
 
 function Home() {
     return (
@@ -113,6 +117,55 @@ function Home() {
                     <img src={require('../../assets/images/homepage_imgs/coupon4.png')} alt=""></img>
                 </div>
             </div>
+
+            <div className={cx('category')}>
+                <div className={cx('category-title')}>
+                <FontAwesomeIcon icon={faListUl} className={cx('category-icon')}/>
+                <span >Danh mục sản phẩm</span>
+                </div>
+                <div className={cx('category-lists')}>
+                    <div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    <div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div><div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div><div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div><div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div><div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div><div className={cx('category-item')}>
+                        <a href='#'>
+                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
+                        <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+
+
         </main>
     );
 }
