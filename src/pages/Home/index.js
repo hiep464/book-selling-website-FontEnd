@@ -2,10 +2,9 @@ import style from './home.module.scss';
 import classNames from 'classnames/bind';
 import { faListUl } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import Product from './Product';
 
 const cx = classNames.bind(style);
-
 
 function Home() {
     return (
@@ -118,54 +117,85 @@ function Home() {
                 </div>
             </div>
 
-            <div className={cx('category')}>
-                <div className={cx('category-title')}>
-                <FontAwesomeIcon icon={faListUl} className={cx('category-icon')}/>
-                <span >Danh mục sản phẩm</span>
+            <div className={cx('frame')}>
+                <div className={cx('frame-title')}>
+                    <FontAwesomeIcon icon={faListUl} className={cx('category-icon')} />
+                    <span>Danh mục sản phẩm</span>
                 </div>
-                <div className={cx('category-lists')}>
-                    <div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
+                <div className={cx('category-lists', 'row')}>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
                         </a>
                     </div>
-                    <div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
-                        </a>
-                    </div><div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
-                        </a>
-                    </div><div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
-                        </a>
-                    </div><div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
-                        </a>
-                    </div><div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
-                        </a>
-                    </div><div className={cx('category-item')}>
-                        <a href='#'>
-                        <img src={require('../../assets/images/categories/foreign-books.png')} alt=''></img>
-                        <p>Sách tham khảo</p>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
                         </a>
                     </div>
-                    
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
+                        </a>
+                    </div>
+                    <div className={cx('category-item', 'col')}>
+                        <a href="#">
+                            <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
+                            <p>Sách tham khảo</p>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-
+            <div className={cx('frame')}>
+                <div className={cx('product-category-title', 'frame-title')}>
+                    <span>Thiếu nhi</span>
+                </div>
+                <div className={cx('category-product-list')}>
+                    <div className={cx('row')}>
+                        <div className={cx('advertise', 'col-md-4')}>
+                            <img
+                                src={require('../../assets/images/advertisements/BannerBlock09_KinhTe_350x415.jpg')}
+                                alt=""
+                            ></img>
+                        </div>
+                        <div className={cx('col-md-8')}>
+                            <div className={cx('product-list')}>
+                                <Product></Product>
+                                <Product></Product>
+                                <Product></Product>
+                                <Product></Product>
+                            </div>
+                            <div className={cx('more-detail')}>
+                                <button type="button" className={cx('more-detail-btn')}>
+                                    Xem thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     );
 }
