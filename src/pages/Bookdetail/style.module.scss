@@ -1,6 +1,141 @@
-.bookdetail-wrapper{
+a:hover {
+    cursor: pointer;
+}
+
+.bookdetail-wrapper {
     margin-top: 20px;
     background-color: white;
     height: 468px;
     padding: 16px;
+    // margin-top: 15px;
 }
+
+.bookdetail-thumbnail {
+}
+
+.bookdetail-content {
+}
+
+.thumbnail-img > img {
+    width: 85%;
+}
+
+.more-detail-btn {
+    justify-content: center;
+    color: #c92127;
+    background-color: #fff;
+    border: 2px solid #c92127;
+    font-size: 14px;
+    font-weight: 700;
+    width: 210px;
+    max-width: 100%;
+    height: 40px;
+    max-height: 100%;
+    border-radius: 8px;
+    margin: 24px 0 12px 0;
+}
+
+.more-detail-btn > span {
+    margin-left: 8px;
+}
+
+.buy-now {
+    color: #fff;
+    background-color: #c92127;
+    border: 2px solid #c92127;
+}
+
+.buy-now:hover {
+    background-color: #fff !important;
+    color: #c92127 !important;
+}
+
+.thumbnail-btn {
+}
+
+.more-detail-btn:hover {
+    background-color: #c92127;
+    color: #fff;
+}
+
+.content-detail {
+    padding-left: 6rem !important;
+}
+
+.book-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.5em;
+    overflow-wrap: break-word;
+    padding-bottom: 16px;
+    text-align: left;
+}
+
+.book-detail-info {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.book-detail-supplier, 
+.book-detail-author {
+    text-align: left;
+    margin: 8px 0;
+}
+
+.star {
+    margin: 0 10px;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.color {
+    color: #e3e5e5;
+}
+
+.bookdetail-price{
+    font-size: 32px;
+    line-height: 32px;
+    color: #C92127;
+    font-family: 'Roboto',sans-serif !important;
+    font-weight: 700;
+    text-align: left;
+    margin: 18px 0;
+}
+
+.book-more-info{
+    text-align: left;
+}
+
+.book-quantity{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 16px 0;
+}
+
+.book-quantity-text {
+    font-size: 1.7em;
+    font-weight: 500;
+    padding: 0 8px 0 0;
+    margin-bottom: 0;
+    text-align: left;
+    max-width: 200px;
+    min-width: 150px;
+    color: #555555;
+}
+
+.quantity-btn {
+    border: 1px solid #c1c1c1;
+    border-radius: 4px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 118px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+
