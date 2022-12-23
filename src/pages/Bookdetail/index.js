@@ -5,6 +5,8 @@ import style from './style.module.scss';
 import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import ReactReadMoreReadLess from 'react-read-more-read-less';
+import Comment  from './Comment';
 
 const cx = classNames.bind(style);
 
@@ -33,6 +35,7 @@ function Bookdetail() {
     if (counter <= 1) {
         decrementCounter = () => setCounter(1);
     }
+
     return (
         <div className={cx('page-wrapper')}>
             <nav aria-label="breadcrumb">
@@ -142,16 +145,166 @@ function Bookdetail() {
                             <p>Năm xuất bản</p>
                         </div>
                     </div>
-                    <p style={{fontSize: '1.5rem'}}>
+                    <p style={{ fontSize: '1.5rem' }}>
                         Giá sản phẩm trên đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình
                         thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như Phụ phí đóng gói, phí vận
                         chuyển, phụ phí hàng cồng kềnh,...
                     </p>
                     <hr></hr>
-                    <div></div>
+                    <div style={{ fontSize: '1.5rem' }}>
+                        <ReactReadMoreReadLess
+                            charLimit={400}
+                            readMoreText={'Read more ▼'}
+                            readLessText={'Read less ▲'}
+                            readMoreStyle={{ fontWeight: '600', cursor: 'pointer', fontSize: '1.5rem' }}
+                            readLessStyle={{ fontWeight: '600', cursor: 'pointer', fontSize: '1.5rem' }}
+                        >
+                            MỘT TRONG NHỮNG CUỐN SÁCH MỞ KHÓA HỮU ÍCH NHẤT VỀ TƯ DUY, KÝ ỨC VÀ CẢM XÚC CỦA CON NGƯỜI! Ám
+                            sợ là gì, ám sợ có thực sự đáng sợ không? Rối loạn tâm lý là gì, làm thế nào để thoát khỏi
+                            tình trạng suy nhược và xáo trộn đó? Trầm cảm là gì, vì sao con người hiện đại thường xuyên
+                            gặp và chống chọi với tình trạng u uất, mệt mỏi và tuyệt vọng này? Tìm hiểu về các vấn đề
+                            tâm trí của con người luôn đầy sức hấp dẫn và lôi cuốn, vì vậy mà tâm lý học ra đời, hình
+                            thành và phát triển rất nhiều các học thuyết và trường phái. Cuốn sách này dẫn dắt bạn đọc
+                            qua hành trình tìm hiểu các học thuyết và trường phái đó, về cách các nhà tâm lý diễn giải
+                            hành xử và tâm trí con người. Tại sao chúng ta có những hành vi, suy nghĩ và cảm xúc như
+                            vậy, chúng diễn ra và kết thúc như thế nào, chúng ảnh hưởng lâu dài, gián đoạn hay ngắn ngủỉ
+                            đến đời sống của chúng ta ra sao, làm thế nào để chúng ta thoát khỏi những tác động tiêu cực
+                            của chúng? Cuốn sách có cấu trúc khoa học, trình bày dễ hiểu, súc tích, thiết kế và minh họa
+                            đẹp mắt này sẽ mang đến cho bạn những hiểu biết về các học thuyết tâm lý và các phương pháp
+                            trị liệu, từ các vấn đề cá nhân đến những ứng dụng thực tế. Mã hàng 8935235227699 Tên Nhà
+                            Cung Cấp Nhã Nam Tác giả Jo Hemmings Người Dịch Trần Trương Phúc Hạnh, Phương Hoài Nga hiệu
+                            đính NXB NXB Thế Giới Năm XB 2020 Trọng lượng (gr) 980 Kích Thước Bao Bì 23 x 19.5 cm Số
+                            trang 247 Hình thức Bìa Cứng Sản phẩm hiển thị trong Nhã Nam Tủ Sách Tâm Lý Kỹ Năng Sản phẩm
+                            bán chạy nhất Top 100 sản phẩm Tâm lý bán chạy của tháng Giá sản phẩm trên Fahasa.com đã bao
+                            gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao
+                            hàng mà có thể phát sinh thêm chi phí khác như Phụ phí đóng gói, phí vận chuyển, phụ phí
+                            hàng cồng kềnh,... MỘT TRONG NHỮNG CUỐN SÁCH MỞ KHÓA HỮU ÍCH NHẤT VỀ TƯ DUY, KÝ ỨC VÀ CẢM
+                            XÚC CỦA CON NGƯỜI! Ám sợ là gì, ám sợ có thực sự đáng sợ không? Rối loạn tâm lý là gì, làm
+                            thế nào để thoát khỏi tình trạng suy nhược và xáo trộn đó? Trầm cảm là gì, vì sao con người
+                            hiện đại thường xuyên gặp và chống chọi với tình trạng u uất, mệt mỏi và tuyệt vọng này? Tìm
+                            hiểu về các vấn đề tâm trí của con người luôn đầy sức hấp dẫn và lôi cuốn, vì vậy mà tâm lý
+                            học ra đời, hình thành và phát triển rất nhiều các học thuyết và trường phái. Cuốn sách này
+                            dẫn dắt bạn đọc qua hành trình tìm hiểu các học thuyết và trường phái đó, về cách các nhà
+                            tâm lý diễn giải hành xử và tâm trí con người. Tại sao chúng ta có những hành vi, suy nghĩ
+                            và cảm xúc như vậy, chúng diễn ra và kết thúc như thế nào, chúng ảnh hưởng lâu dài, gián
+                            đoạn hay ngắn ngủỉ đến đời sống của chúng ta ra sao, làm thế nào để chúng ta thoát khỏi
+                            những tác động tiêu cực của chúng?
+                        </ReactReadMoreReadLess>
+                    </div>
                 </div>
             </div>
-            <div className={cx('bookdetail-wrapper', 'row')}>Feed back</div>
+            <div className={cx('bookdetail-wrapper')}>
+                <h2>Đánh giá sản phẩm</h2>
+                <div className={cx('feedback-block', 'row')}>
+                    <div className={cx('col-2')}>
+                        <div className={cx('feedback-point')}>
+                            <div style={{ fontSize: '5rem' }}>
+                                5<span style={{ fontSize: '3rem' }}>/5</span>
+                            </div>
+                            <div className={cx('feedback-point-star')}>
+                                <div className={cx('star')}>
+                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                </div>
+                            </div>
+                            <div
+                                className={cx('feedback-point-quantity')}
+                                style={{ fontSize: '13px', fontWeight: '500' }}
+                            >
+                                <p>2 đánh giá</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('feedback-star', 'col-4')}>
+                        <div className={cx('feedback-star-block')}>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
+                            <div className={cx('progress', 'feedback-star-point')}>
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style={{ width: '100%' }}
+                                    aria-valuenow="75"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
+                        </div>
+                        <div className={cx('feedback-star-block')}>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
+                            <div className={cx('progress', 'feedback-star-point')}>
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style={{ width: '100%' }}
+                                    aria-valuenow="75"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
+                        </div>
+                        <div className={cx('feedback-star-block')}>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
+                            <div className={cx('progress', 'feedback-star-point')}>
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style={{ width: '100%' }}
+                                    aria-valuenow="75"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
+                        </div>
+                        <div className={cx('feedback-star-block')}>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
+                            <div className={cx('progress', 'feedback-star-point')}>
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style={{ width: '100%' }}
+                                    aria-valuenow="75"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
+                        </div>
+                        <div className={cx('feedback-star-block')}>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
+                            <div className={cx('progress', 'feedback-star-point')}>
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style={{ width: '100%' }}
+                                    aria-valuenow="75"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
+                        </div>
+                    </div>
+                    <div className={cx('feedback-login', 'col-6')}>
+                        <p>
+                            Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href='#'>đăng nhập</a> hoặc 
+                            <a href='#'> đăng ký</a>.
+                        </p>
+                    </div>
+                </div>
+                <hr></hr>
+                <div className={cx('comment-zone')}>
+                    <div className={cx('newest')}>
+                        <p><strong>Mới nhất</strong></p>
+                    </div>
+                <Comment />
+                </div>
+            </div>
         </div>
     );
 }
