@@ -48,7 +48,7 @@ function Footer() {
                             </div>
                             <div className={cx('certificate-img')}>
                                 <img
-                                    src={require('../../../assets/images/logo-bo-cong-thuong-da-thong-bao1.png')}
+                                    src={require('../../../assets/images/logo-bo-cong-thuong-da-thong-bao1.png')} alt=''
                                 ></img>
                             </div>
                             <div className={cx('footer-social')}>
