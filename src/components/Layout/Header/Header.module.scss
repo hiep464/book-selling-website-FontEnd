@@ -102,6 +102,29 @@
     justify-content: center;
 }
 
+///cart guest
+.cart-guest{
+    width: 150px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
+
+    span{
+        margin-bottom: 20px;
+        font-size: 12px;
+    }
+}
+
+.cart-guest-icon{
+    width: 48px;
+    height: 48px;
+    margin: 20px 0 5px 0;
+}
+
 .common {
     width: 60px;
     height: 60px;
@@ -135,6 +158,8 @@
     flex-direction: column;
     height: 100px;
     border-radius: 4px;
+    box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
+    font-size: 12px;
 }
 
 .btn {
@@ -171,6 +196,7 @@
     width: 200px;
     background-color: white;
     border-radius: 4px;
+    box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
 }
 
 .notification-header {
