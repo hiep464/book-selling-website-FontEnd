@@ -31,7 +31,7 @@ function Header() {
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
 
-    const user = true;
+    const user = false;
 
     return (
         <header className={cx('wrapper')}>

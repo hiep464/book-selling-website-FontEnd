@@ -1,0 +1,52 @@
+.cart-block {
+    margin-top: 20px;
+}
+
+.cart-block-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cart-block-title h1 {
+    margin: 0px 0 0;
+    font-weight: 500;
+    color: #333333 !important;
+    line-height: 20px;
+    font-size: 2.2rem;
+    margin-right: 1rem;
+}
+
+.cart-block-title span {
+    font-size: 1.5rem;
+}
+
+
+.frame-block {
+    border-radius: 8px;
+    padding: 10px 15px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.all-option {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: 500;
+}
+
+.all-option > input {
+    margin: 0 1rem 0 0;
+}
+
+.all-option-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.all-option div {
+    margin-left: 8rem;
+}
