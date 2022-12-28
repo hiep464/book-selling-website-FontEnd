@@ -1,52 +1,86 @@
-.cart-block {
-    margin-top: 20px;
+.page-wrapper {
+    width: 100%;
 }
 
-.cart-block-title {
+.page-title {
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.cart-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.cart-block-title h1 {
-    margin: 0px 0 0;
-    font-weight: 500;
-    color: #333333 !important;
-    line-height: 20px;
-    font-size: 2.2rem;
-    margin-right: 1rem;
-}
-
-.cart-block-title span {
-    font-size: 1.5rem;
-}
-
-
-.frame-block {
-    border-radius: 8px;
-    padding: 10px 15px;
-    background-color: white;
-    margin-top: 10px;
-}
-
-.all-option {
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    font-weight: 500;
-}
-
-.all-option > input {
-    margin: 0 1rem 0 0;
-}
-
-.all-option-block {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
-.all-option div {
-    margin-left: 8rem;
+.cart-left {
+    width: 63%;
+    font-size: 16px;
+    font-weight: 500;
+
+    .cart-navbar {
+        display: flex;
+        background-color: white;
+        padding: 6px 0;
+        border-radius: 6px;
+    }
+}
+
+table {
+    width: calc(100% - 52px);
+}
+
+.cart-right {
+    width: 35%;
+    background-color: white;
+    height: 200px;
+    border-radius: 6px;
+}
+
+.sellect-all,
+.amount{
+    text-align: left;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-right-header{
+    font-size: 16px;
+    margin: 10px 14px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 14px;
+}
+
+.cart-right-body{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 14px;
+}
+
+.btn{
+    background-color: #e0e0e0;
+    margin: 30px 14px;
+    width: calc(100% - 28px);
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    color: white;
+}
+
+.cart-left input{
+    height: 20px;
+    width: 20px;
+}
+
+.cart-navbar-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

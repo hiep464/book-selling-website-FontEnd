@@ -31,7 +31,7 @@ function Header() {
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
 
-    const user = false;
+    const user = true;
 
     return (
         <header className={cx('wrapper')}>
@@ -114,11 +114,7 @@ function Header() {
                                     </div>
                                 </div>
                             ) : (
-                                <div
-                                    className={cx('notification-display', disable ? 'disable' : '')}
-                                    tabIndex="-1"
-                                    {...attrs}
-                                >
+                                <div className={cx('notification-display')} tabIndex="-1" {...attrs}>
                                     <div className={cx('notification-header')}>
                                         <FontAwesomeIcon icon={faBell} />
                                         <span>Thông báo</span>
@@ -126,40 +122,6 @@ function Header() {
                                     <div className={cx('notification-body')}>
                                         <FontAwesomeIcon className={cx('notification-body-icon')} icon={faLock} />
                                         <span>Vui lòng đăng nhập để xem thông báo</span>
-                                    </div>
-                                    <div className={cx('notification-footer')}>
-                                        <Link
-                                            to={{
-                                                pathname: '/login',
-                                            }}
-                                            state={{ login: true }}
-                                            style={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            <button className={cx('btn', 'btn-login')} onClick={addDisable}>
-                                                Login
-                                            </button>
-                                        </Link>
-                                        <Link
-                                            to={{
-                                                pathname: '/login',
-                                            }}
-                                            state={{ login: false }}
-                                            style={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            <button className={cx('btn', 'btn-register')} onClick={addDisable}>
-                                                Regiter
-                                            </button>
-                                        </Link>
                                     </div>
                                 </div>
                             )
@@ -170,12 +132,37 @@ function Header() {
                             <span>Thông báo</span>
                         </div>
                     </HeadlessTippy>
-                    <Link to="/cart" style={{ textDecoration: 'none' }}>
-                        <div className={cx('cart', 'common')}>
-                            <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
-                            <span>Giỏ hàng</span>
-                        </div>
-                    </Link>
+                    <HeadlessTippy
+                        interactive={true}
+                        placement="bottom-end"
+                        // visible
+                        render={(attrs) => <div></div>}
+                    >
+                        {!user ? (
+                            <HeadlessTippy
+                                interactive={true}
+                                placement="bottom-end"
+                                // visible
+                                render={(attrs) => 
+                                    <div className={cx('cart-guest')}>
+                                        <FontAwesomeIcon className={cx('cart-guest-icon')} icon={faCartShopping}/>
+                                        <span>Chưa có sản phẩm</span>
+                                    </div>}
+                            >
+                                <div className={cx('cart', 'common')}>
+                                    <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
+                                    <span>Giỏ hàng</span>
+                                </div>
+                            </HeadlessTippy>
+                        ) : (
+                            <Link to="/cart" style={{ textDecoration: 'none' }}>
+                                <div className={cx('cart', 'common')}>
+                                    <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
+                                    <span>Giỏ hàng</span>
+                                </div>
+                            </Link>
+                        )}
+                    </HeadlessTippy>
 
                     <HeadlessTippy
                         interactive
