@@ -11,14 +11,22 @@ function App() {
                         const Page = route.component;
 
                         let Layout = DefaultLayout;
-
+                        let ProfileLayout = route.layout;
+                        console.log(route.layout)
                         return (
                             <Route
                                 key={index}
                                 path={route.path}
                                 element={
                                     <Layout>
-                                        <Page />
+                                        {
+                                            !route.layout ? 
+                                            <Page /> :
+                                            <ProfileLayout>
+                                                <Page />
+                                            </ProfileLayout>
+                                        }
+                                        
                                     </Layout>
                                 }
                             ></Route>

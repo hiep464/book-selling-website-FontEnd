@@ -1,18 +1,10 @@
 import styles from './menu.module.scss';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Menu() {
-    const [visible, setVisible] = useState(false);
-    const show = () => setVisible(true);
-    const hide = () => setVisible(false);
-
-    const [disable, setDisable] = useState(false);
-    const addDisable = () => setDisable(true);
-    const remoteDisable = () => setDisable(false);
     return (
         <div className={cx('menu-block')}>
             <div className={cx('title-block', 'block-bottom')}>
@@ -23,23 +15,28 @@ function Menu() {
             <div className={cx('content-block')}>
                 <ul>
                     <li>
-                        <Link to="/profile/detail" onClick={remoteDisable}>
+                        <Link to="/info">
                             Thông tin tài khoản
                         </Link>
                     </li>
                     <li>
-                        <Link to="/profile/address" onClick={remoteDisable}>
+                        <Link to="/adress">
                             Số địa chỉ
                         </Link>
                     </li>
                     <li>
-                        <Link to="/profile/order-list" onClick={remoteDisable}>
+                        <Link to="/order">
                             Đơn hàng của tôi
                         </Link>
                     </li>
                     <li>
-                        <Link to="/profile/review" onClick={remoteDisable}>
+                        <Link to="/comment">
                             Nhận xét của tôi
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/notifi">
+                            Thong bao
                         </Link>
                     </li>
                 </ul>

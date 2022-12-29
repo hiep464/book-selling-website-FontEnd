@@ -5,23 +5,24 @@ import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Cart from "../pages/Cart";
 import Notifi from "../pages/Notifi";
-import Account from "../pages/Profile/Account";
-import Address from "../pages/Profile/Address";
-import OrderList from "../pages/Profile/OrderList";
-import Review from "../pages/Profile/Review";
+import ProfileLayout from "../components/Layout/ProfileLayout";
+import Info from "../pages/Info";
+import Adress from "../pages/Adress";
+import Comment from "../pages/Comment";
+import Order from "../pages/Order";
 
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/categories', component: Categories },
     { path: '/bookdetail', component: Bookdetail },
     { path: '/login', component: Login },
-    { path: '/profile', component: Profile },
+    { path: '/profile', component: Profile, layout: ProfileLayout},
     { path: '/cart', component: Cart },
-    { path: '/notifi', component: Notifi },
-    { path: '/profile/detail', component: Account },
-    { path: '/profile/address', component: Address },
-    { path: '/profile/order-list', component: OrderList },
-    { path: '/profile/review', component: Review },
+    { path: '/notifi', component: Notifi , layout: ProfileLayout},
+    { path: '/info', component: Info , layout: ProfileLayout},
+    { path: '/adress', component: Adress , layout: ProfileLayout},
+    { path: '/comment', component: Comment , layout: ProfileLayout},
+    { path: '/order', component: Order , layout: ProfileLayout}
 ];
 
 const privateRoutes = [];
