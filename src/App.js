@@ -1,31 +1,42 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from './routes';
+import { privateRoutes, publicRoutes } from './routes';
 import DefaultLayout from './components/Layout/DefaultLayout';
+import AdminLayout from './components/Layout/AdminLayout/AdminLayout';
 
 function App() {
     return (
         <Router>
-            <div className="App">
-                <Routes>
-                    {publicRoutes.map((route, index) => {
-                        const Page = route.component;
+            <Routes>
+                {/* User routes */}
+                {publicRoutes.map((route, index) => {
+                    const Page = route.component;
 
-                        let Layout = DefaultLayout;
+                    let Layout = DefaultLayout;
 
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <div className="App">
                                     <Layout>
                                         <Page />
                                     </Layout>
-                                }
-                            ></Route>
-                        );
+                                </div>
+                            }
+                        ></Route>
+                    );
+                })}
+
+                {/* Admin route (start with /admin) */}
+                <Route path="/admin" element={<AdminLayout />}>
+                    {privateRoutes.map((route, index) => {
+                        const Page = route.component;
+
+                        return <Route key={'admin:' + index} path={'/admin' + route.path} element={<Page />}></Route>;
                     })}
-                </Routes>
-            </div>
+                </Route>
+            </Routes>
         </Router>
     );
 }

@@ -4,18 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
-import 'bootstrap/dist/css/bootstrap.min.css';  
-import $ from 'jquery';  
-import Popper from 'popper.js';  
-import 'bootstrap/dist/js/bootstrap.bundle.min';  
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <GlobalStyles>
-      <App />
-    </GlobalStyles>
-  </React.StrictMode>
+    <React.StrictMode>
+        <GlobalStyles>
+            <App />
+        </GlobalStyles>
+    </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
