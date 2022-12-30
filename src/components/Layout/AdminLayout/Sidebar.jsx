@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from './theme';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
-import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 /*
@@ -17,6 +14,25 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
  * Created on Fri Dec 30 2022
  * Copyright (c) 2022 HaVT
  */
+// NOTE: add button to sidebar
+const sidebarItems = [
+    {
+        type: 'item',
+        title: 'Dashboard',
+        to: '/admin',
+        icon: HomeOutlinedIcon,
+    },
+    {
+        type: 'text',
+        title: 'Orders',
+    },
+    {
+        type: 'item',
+        title: 'Orders',
+        to: '/admin/orders',
+        icon: PeopleOutlinedIcon,
+    },
+];
 
 /**
  * Sidebar item
@@ -33,7 +49,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
             onClick={() => setSelected(title)}
             icon={icon}
         >
-            <Typography fontSize={12}>{title}</Typography>
+            <Typography>{title}</Typography>
             <Link to={to} />
         </MenuItem>
     );
@@ -58,7 +74,7 @@ const Sidebar = () => {
                     backgroundColor: 'transparent !important',
                 },
                 '& .pro-inner-item': {
-                    padding: '5px 35px 5px 10px !important',
+                    padding: '5px 35px 5px 16px !important',
                 },
                 '& .pro-inner-item:hover': {
                     color: '#868dfb !important',
@@ -93,15 +109,7 @@ const Sidebar = () => {
 
                     {!isCollapsed && (
                         <Box mb="25px">
-                            <Box display="flex" justifyContent="center" alignItems="center">
-                                {/* <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.jpg`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                /> */}
-                            </Box>
+                            <Box display="flex" justifyContent="center" alignItems="center"></Box>
                             <Box textAlign="center">
                                 <Typography
                                     variant="h2"
@@ -118,25 +126,40 @@ const Sidebar = () => {
                         </Box>
                     )}
 
+                    {/* Render sidebar items */}
                     <Box paddingLeft={isCollapsed ? undefined : '10%'}>
-                        <Item
-                            title="Dashboard"
-                            to="/admin"
-                            icon={<HomeOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-
-                        <Typography variant="h5" color={colors.grey[300]} sx={{ m: '15px 0 5px 20px' }}>
-                            Nhập hàng
-                        </Typography>
-                        <Item
-                            title="Orders"
-                            to="/admin/orders"
-                            icon={<PeopleOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        {sidebarItems.map((item) => {
+                            switch (item.type) {
+                                case 'text':
+                                    return isCollapsed ? (
+                                        <Divider key={item.title} />
+                                    ) : (
+                                        <Typography
+                                            key={item.title}
+                                            // variant="h5"
+                                            color={colors.grey[300]}
+                                            sx={{
+                                                m: '15px 0 5px 20px',
+                                            }}
+                                        >
+                                            {item.title}
+                                        </Typography>
+                                    );
+                                case 'item':
+                                    return (
+                                        <Item
+                                            key={item.title + item.type}
+                                            title={item.title}
+                                            to={item.to}
+                                            icon={<item.icon />}
+                                            selected={selected}
+                                            setSelected={setSelected}
+                                        />
+                                    );
+                                default:
+                                    return null;
+                            }
+                        })}
                     </Box>
                 </Menu>
             </ProSidebar>
