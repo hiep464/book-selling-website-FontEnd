@@ -1,45 +1,33 @@
-.homepage{
+.homepage {
     margin-top: 20px;
 }
-
-
 
 .img-border {
     border-radius: 8px;
 }
 
-.homepage-advertise{
+.homepage-advertise {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     padding: 0 !important;
     margin: 0 !important;
-
 }
 
-.homepage-advertise-left{
+.homepage-advertise-left {
     padding: 0 !important;
-
 }
 
-.homepage-advertise-right{
+.homepage-advertise-right {
     padding: 0 !important;
     display: contents;
 }
 
-.advertise-right-img{
-
-}
-
-.right-img{
-}
-
-.bottom-img{
+.bottom-img {
     padding-top: 8px;
 }
 
-.coupon{
-    
+.coupon {
     display: flex !important;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -48,13 +36,13 @@
     margin-top: 26px;
 }
 
-.frame{
+.frame {
     background-color: #fff;
     border-radius: 8px;
     margin-top: 26px;
 }
 
-.frame-title{
+.frame-title {
     font-size: 2.2rem;
     font-weight: bold;
     color: #212121;
@@ -70,20 +58,20 @@
     margin-left: 1.6rem;
 }
 
-.category-icon{
+.category-icon {
     color: #c92127;
     font-size: 2.2rem;
     font-weight: bold;
 }
 
-.category-lists{
+.category-lists {
     padding: 1.2rem;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
 }
 
-.category-item{
+.category-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,7 +86,7 @@
     transition: 0.5s;
 }
 
-.category-item > a> p {
+.category-item > a > p {
     margin-top: 1.2rem;
 }
 
@@ -106,18 +94,18 @@
     color: #c92127;
 }
 
-.product-category-title{
+.product-category-title {
     font-size: 17px;
-    color: #1F1D1D;
+    color: #1f1d1d;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.category-product-list{
+.category-product-list {
     padding: 12px;
 }
 
-.product-list{
+.product-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -126,11 +114,11 @@
     align-items: center;
 }
 
-.more-detail-btn{
+.more-detail-btn {
     justify-content: center;
-    color: #C92127;
+    color: #c92127;
     background-color: #fff;
-    border: 2px solid #C92127;
+    border: 2px solid #c92127;
     font-size: 14px;
     font-weight: 700;
     width: 210px;
@@ -142,6 +130,6 @@
 }
 
 .more-detail-btn:hover {
-    background-color: #C92127;
+    background-color: #c92127;
     color: #fff;
 }

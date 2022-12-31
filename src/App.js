@@ -14,17 +14,22 @@ function App() {
                         const Page = route.component;
 
                         let Layout = DefaultLayout;
+                        let ProfileLayout = route.layout;
 
                         return (
                             <Route
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <div className="App">
-                                        <Layout>
+                                    <Layout>
+                                        {!route.layout ? (
                                             <Page />
-                                        </Layout>
-                                    </div>
+                                        ) : (
+                                            <ProfileLayout>
+                                                <Page />
+                                            </ProfileLayout>
+                                        )}
+                                    </Layout>
                                 }
                             ></Route>
                         );
