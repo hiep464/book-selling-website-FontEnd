@@ -1,7 +1,5 @@
 function Adress() {
-    return ( 
-        <div>Adress</div>
-     );
+    return <div>Adress</div>;
 }
 
 export default Adress;
