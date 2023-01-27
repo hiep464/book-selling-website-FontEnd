@@ -11,6 +11,9 @@ import Adress from '../pages/Adress';
 import Comment from '../pages/Comment';
 import Order from '../pages/Order';
 import Dashboard from '../pages/Admin/Dashboard/index';
+import Orders from '../pages/Admin/Orders';
+import Customers from '../pages/Admin/Customers';
+import Products from '../pages/Admin/Products';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -29,7 +32,9 @@ const publicRoutes = [
 // prefix: /admin added in App.js
 const privateRoutes = [
     { path: '/', component: Dashboard },
-    { path: '/orders', component: Dashboard },
+    { path: '/orders', component: Orders },
+    { path: '/customers', component: Customers },
+    { path: '/products', component: Products },
 ];
 
 export { publicRoutes, privateRoutes };

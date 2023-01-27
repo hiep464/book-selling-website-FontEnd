@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { faListUl } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Product from './Product';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 import Login from '../Login';
 
 const cx = classNames.bind(style);

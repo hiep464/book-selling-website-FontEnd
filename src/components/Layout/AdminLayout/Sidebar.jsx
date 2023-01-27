@@ -7,6 +7,9 @@ import { tokens } from './theme';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 /*
  * @brief Admin sidebar
@@ -30,7 +33,37 @@ const sidebarItems = [
         type: 'item',
         title: 'Orders',
         to: '/admin/orders',
+        icon: ListAltOutlinedIcon,
+    },
+    {
+        type: 'text',
+        title: 'Customers',
+    },
+    {
+        type: 'item',
+        title: 'Customers',
+        to: '/admin/customers',
         icon: PeopleOutlinedIcon,
+    },
+    {
+        type: 'text',
+        title: 'Products',
+    },
+    {
+        type: 'item',
+        title: 'Products',
+        to: '/admin/products',
+        icon: MenuBookOutlinedIcon,
+    },
+    {
+        type: 'text',
+        title: 'LogOut',
+    },
+    {
+        type: 'item',
+        title: 'LogOut',
+        to: '/',
+        icon: LogoutOutlinedIcon,
     },
 ];
 
