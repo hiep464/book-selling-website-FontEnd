@@ -15,28 +15,23 @@ function Menu() {
             <div className={cx('content-block')}>
                 <ul>
                     <li>
-                        <Link to="/info">
+                        <Link to="/profile">
                             Thông tin tài khoản
                         </Link>
                     </li>
                     <li>
-                        <Link to="/adress">
-                            Số địa chỉ
-                        </Link>
-                    </li>
-                    <li>
                         <Link to="/order">
-                            Đơn hàng của tôi
+                            Đơn hàng
                         </Link>
                     </li>
                     <li>
                         <Link to="/comment">
-                            Nhận xét của tôi
+                            Nhận xét
                         </Link>
                     </li>
                     <li>
                         <Link to="/notifi">
-                            Thong bao
+                            Thông báo
                         </Link>
                     </li>
                 </ul>
