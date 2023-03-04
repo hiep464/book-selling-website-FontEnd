@@ -5,10 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Product from './Product';
 // import Slider from 'react-slick';
 import Login from '../Login';
+import { useGetBooks } from '../../api/useBook';
 
 const cx = classNames.bind(style);
 
 function Home() {
+    const books = useGetBooks(
+        { page: 1, limit: 10 },
+        { maxPrice: 100000, minPrice: 0, sortBy: 'price', sortOrder: 'asc' },
+    );
+    console.log(books);
+
     return (
         <main className={cx('homepage')}>
             <div className={cx('homepage-advertise', 'row', 'container')}>
@@ -184,10 +191,19 @@ function Home() {
                         </div>
                         <div className={cx('col-md-8')}>
                             <div className={cx('product-list')}>
+                                {books?.map((book) => (
+                                    <Product
+                                        key={book.id}
+                                        id={book.id}
+                                        url={book.coverUrl}
+                                        title={book.title}
+                                        rating={book.rating}
+                                        price={book.price}
+                                    ></Product>
+                                ))}
+                                {/* <Product></Product>
                                 <Product></Product>
-                                <Product></Product>
-                                <Product></Product>
-                                <Product></Product>
+                                <Product></Product> */}
                             </div>
                             <div className={cx('more-detail')}>
                                 <button type="button" className={cx('more-detail-btn')}>
@@ -199,9 +215,9 @@ function Home() {
                 </div>
             </div>
 
-            <Login/>
+            <Login />
         </main>
     );
-};
+}
 
 export default Home;

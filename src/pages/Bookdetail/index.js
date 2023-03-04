@@ -6,7 +6,8 @@ import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-ico
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
-import Comment  from './Comment';
+import Comment from './Comment';
+import { useGetBooks } from '../../api/useBook';
 
 const cx = classNames.bind(style);
 
@@ -292,17 +293,19 @@ function Bookdetail() {
                     </div>
                     <div className={cx('feedback-login', 'col-6')}>
                         <p>
-                            Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href='#'>đăng nhập</a> hoặc 
-                            <a href='#'> đăng ký</a>.
+                            Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="#">đăng nhập</a> hoặc
+                            <a href="#"> đăng ký</a>.
                         </p>
                     </div>
                 </div>
                 <hr></hr>
                 <div className={cx('comment-zone')}>
                     <div className={cx('newest')}>
-                        <p><strong>Mới nhất</strong></p>
+                        <p>
+                            <strong>Mới nhất</strong>
+                        </p>
                     </div>
-                <Comment />
+                    <Comment />
                 </div>
             </div>
         </div>
