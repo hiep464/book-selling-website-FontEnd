@@ -34,7 +34,9 @@ function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-    const feedbackList = useGetBookFeedback(bookId);
+
+    const bookFeedbackResponse = useGetBookFeedback(bookId);
+    const feedbackList = bookFeedbackResponse?.data;
 
     return (
         <div className={cx('page-wrapper')}>

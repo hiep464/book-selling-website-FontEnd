@@ -12,8 +12,8 @@ import { useCallback } from 'react';
 const cx = classNames.bind(style);
 
 function Home() {
-    const books = useGetBooks({ page: 1, limit: 10 }, { sortBy: 'price', sortOrder: 'asc' });
-    console.log(books);
+    const bookListResponse = useGetBooks({ page: 1, limit: 10 }, { sortBy: 'price', sortType: 'asc' });
+    const books = bookListResponse?.data || [];
 
     const navigate = useNavigate();
     const navigateToBookDetail = useCallback(
