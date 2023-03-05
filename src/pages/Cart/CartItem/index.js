@@ -2,10 +2,21 @@ import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function CartItem() {
+function CartItem({quantity}) {
+    const [quantityBook, setQuantityBook] = useState(quantity);
+
+    const handlePlus = () => {
+        setQuantityBook(quantityBook + 1);
+    }
+    const handleMinus = () => {
+        if(quantityBook > 0)
+            setQuantityBook(quantityBook - 1);
+    }
+
     return (
         <div className={cx('item-wrapper')}>
             <div style={{ width: '48px' }} className={cx('center')}>
@@ -27,11 +38,9 @@ function CartItem() {
             </div>
             <div className={cx('center')}>
                 <div className={cx('select')}>
-                    <FontAwesomeIcon className={cx('minus')} icon={faMinus}></FontAwesomeIcon>
-                    <span className={cx('number')}>1</span>
-                    <FontAwesomeIcon className={cx('plus')} icon={faPlus}>
-                        +
-                    </FontAwesomeIcon>
+                    <FontAwesomeIcon className={cx('minus')} icon={faMinus} onClick={handleMinus}></FontAwesomeIcon>
+                    <span className={cx('number')}>{quantityBook}</span>
+                    <FontAwesomeIcon className={cx('plus')} icon={faPlus} onClick={handlePlus}></FontAwesomeIcon>
                 </div>
             </div>
             <div style={{ width: '146px' }} className={cx('center')}>

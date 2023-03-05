@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './style.module.scss';
 import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
-import Comment  from './Comment';
+import Comment from './Comment';
+import * as feedBackService from '../../apiServices/feedbackServices';
+import StarRatings from 'react-star-ratings';
 
 const cx = classNames.bind(style);
 
@@ -28,13 +30,37 @@ function Display(props) {
     return <label style={{ marginLeft: '.5rem' }}>{props.message}</label>;
 }
 
+const stars = [
+    { index: 5, sum: 0 },
+    { index: 4, sum: 0 },
+    { index: 3, sum: 0 },
+    { index: 2, sum: 0 },
+    { index: 1, sum: 0 },
+];
+
 function Bookdetail() {
     const [counter, setCounter] = useState(1);
+    const [feedbacks, setFeedback] = useState([]);
     const incrementCounter = () => setCounter(counter + 1);
     let decrementCounter = () => setCounter(counter - 1);
     if (counter <= 1) {
         decrementCounter = () => setCounter(1);
     }
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            const result = await feedBackService.getAll(1);
+            setFeedback(result.data);
+            result.data.map((count) => {
+                stars.map((star) => {
+                    if (count.star === star.index) star.sum++;
+                    return 1;
+                });
+                return 1;
+            });
+        };
+        fetchApi();
+    }, []);
 
     return (
         <div className={cx('page-wrapper')}>
@@ -94,11 +120,12 @@ function Bookdetail() {
                         </div>
 
                         <div className={cx('star')}>
+                            {/* <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                            <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
+                            <StarRatings rating={4} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
                             <span>(sold)</span>
                         </div>
 
@@ -214,95 +241,53 @@ function Bookdetail() {
                                 className={cx('feedback-point-quantity')}
                                 style={{ fontSize: '13px', fontWeight: '500' }}
                             >
-                                <p>2 đánh giá</p>
+                                <p>{feedbacks.length} đánh giá</p>
                             </div>
                         </div>
                     </div>
                     <div className={cx('feedback-star', 'col-4')}>
-                        <div className={cx('feedback-star-block')}>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
-                            <div className={cx('progress', 'feedback-star-point')}>
-                                <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: '100%' }}
-                                    aria-valuenow="75"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                ></div>
+                        {stars.map((star) => (
+                            <div className={cx('feedback-star-block')}>
+                                <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>{star.index} sao </span>
+                                <div className={cx('progress', 'feedback-star-point')}>
+                                    <div
+                                        class="progress-bar bg-warning"
+                                        role="progressbar"
+                                        style={{ width: '100%' }}
+                                        aria-valuenow="75"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    ></div>
+                                </div>
+                                <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>
+                                    {(star.sum / feedbacks.length) * 100}%
+                                </span>
                             </div>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
-                        </div>
-                        <div className={cx('feedback-star-block')}>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
-                            <div className={cx('progress', 'feedback-star-point')}>
-                                <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: '100%' }}
-                                    aria-valuenow="75"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                ></div>
-                            </div>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
-                        </div>
-                        <div className={cx('feedback-star-block')}>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
-                            <div className={cx('progress', 'feedback-star-point')}>
-                                <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: '100%' }}
-                                    aria-valuenow="75"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                ></div>
-                            </div>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
-                        </div>
-                        <div className={cx('feedback-star-block')}>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
-                            <div className={cx('progress', 'feedback-star-point')}>
-                                <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: '100%' }}
-                                    aria-valuenow="75"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                ></div>
-                            </div>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
-                        </div>
-                        <div className={cx('feedback-star-block')}>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
-                            <div className={cx('progress', 'feedback-star-point')}>
-                                <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style={{ width: '100%' }}
-                                    aria-valuenow="75"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                ></div>
-                            </div>
-                            <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>100%</span>
-                        </div>
+                        ))}
                     </div>
                     <div className={cx('feedback-login', 'col-6')}>
                         <p>
-                            Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href='#'>đăng nhập</a> hoặc 
-                            <a href='#'> đăng ký</a>.
+                            Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="#">đăng nhập</a> hoặc
+                            <a href="#"> đăng ký</a>.
                         </p>
                     </div>
                 </div>
                 <hr></hr>
                 <div className={cx('comment-zone')}>
                     <div className={cx('newest')}>
-                        <p><strong>Mới nhất</strong></p>
+                        <p>
+                            <strong>Mới nhất</strong>
+                        </p>
                     </div>
-                <Comment />
+                    {feedbacks.map((feedback) => (
+                        <Comment
+                            key={feedback.id}
+                            userid={feedback.userId}
+                            createat={feedback.createdAt}
+                            star={feedback.star}
+                            feedback={feedback.comment}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

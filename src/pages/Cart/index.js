@@ -1,10 +1,20 @@
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import CartItem from './CartItem';
+import { useEffect, useState } from 'react';
+import * as cartService from '../../apiServices/cartService'
 
 const cx = classNames.bind(styles);
 
 function Cart() {
+    const [cart, setCart] = useState([]);
+    useEffect(() => {
+        const fetchApi = async () =>{
+            const result = await cartService.getCart(1);
+            setCart(result.data);
+        }
+        fetchApi();
+    }, [])
     return (
         <div className={cx('page-wrapper')}>
             <header className={cx('page-title')}>Gio hang (x san pham)</header>
@@ -25,9 +35,9 @@ function Cart() {
                         </div>
                     </div>
                     <div className={cx('cart-item')}>
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
+                        {cart.map((item) =>(
+                            <CartItem key={item.bookId} quantity={item.quantity}/>
+                        ))}
                     </div>
                 </div>
                 <div className={cx('cart-right')}>

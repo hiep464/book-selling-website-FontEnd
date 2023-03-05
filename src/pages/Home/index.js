@@ -126,43 +126,43 @@ function Home() {
                 </div>
                 <div className={cx('category-lists', 'row')}>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>
                     </div>
                     <div className={cx('category-item', 'col')}>
-                        <a href="#">
+                        <a href="/#">
                             <img src={require('../../assets/images/categories/foreign-books.png')} alt=""></img>
                             <p>Sách tham khảo</p>
                         </a>

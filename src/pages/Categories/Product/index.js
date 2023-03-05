@@ -10,7 +10,7 @@ function Item() {
         <Link to="/bookdetail" style={{textDecoration: 'none', color: 'black'}}>
             <div className={cx('container')}>
                 <div className={cx('image')}>
-                    {/* <image src="https://cdn0.fahasa.com/media/catalog/product/k/o/komi-nu-than-so-giao-tiep---tap-11.jpg" alt="Item"/> */}
+                    <image src="https://cdn0.fahasa.com/media/catalog/product/k/o/komi-nu-than-so-giao-tiep---tap-11.jpg" alt="Item"/>
                 </div>
                 <h4 className={cx('title')}>
                     Title
