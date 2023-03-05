@@ -3,50 +3,61 @@ import { privateRoutes, publicRoutes } from './routes';
 import DefaultLayout from './components/Layout/DefaultLayout';
 import AdminLayout from './components/Layout/AdminLayout/AdminLayout';
 import GlobalStyles from './components/GlobalStyles';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+const queryClient = new QueryClient();
 
 function App() {
     return (
         <Router>
-            <GlobalStyles>
-                <Routes>
-                    {/* User routes */}
-                    {publicRoutes.map((route, index) => {
-                        const Page = route.component;
-
-                        let Layout = DefaultLayout;
-                        let ProfileLayout = route.layout;
-
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
-                                    <Layout>
-                                        {!route.layout ? (
-                                            <Page />
-                                        ) : (
-                                            <ProfileLayout>
-                                                <Page />
-                                            </ProfileLayout>
-                                        )}
-                                    </Layout>
-                                }
-                            ></Route>
-                        );
-                    })}
-
-                    {/* Admin route (start with /admin) */}
-                    <Route path="/admin" element={<AdminLayout />}>
-                        {privateRoutes.map((route, index) => {
+            <QueryClientProvider client={queryClient}>
+                <GlobalStyles>
+                    <Routes>
+                        {/* User routes */}
+                        {publicRoutes.map((route, index) => {
                             const Page = route.component;
 
+                            let Layout = DefaultLayout;
+                            let ProfileLayout = route.layout;
+
                             return (
-                                <Route key={'admin:' + index} path={'/admin' + route.path} element={<Page />}></Route>
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            {!route.layout ? (
+                                                <Page />
+                                            ) : (
+                                                <ProfileLayout>
+                                                    <Page />
+                                                </ProfileLayout>
+                                            )}
+                                        </Layout>
+                                    }
+                                ></Route>
                             );
                         })}
-                    </Route>
-                </Routes>
-            </GlobalStyles>
+
+                        {/* Admin route (start with /admin) */}
+                        <Route path="/admin" element={<AdminLayout />}>
+                            {privateRoutes.map((route, index) => {
+                                const Page = route.component;
+
+                                return (
+                                    <Route
+                                        key={'admin:' + index}
+                                        path={'/admin' + route.path}
+                                        element={<Page />}
+                                    ></Route>
+                                );
+                            })}
+                        </Route>
+                    </Routes>
+                </GlobalStyles>
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
         </Router>
     );
 }
