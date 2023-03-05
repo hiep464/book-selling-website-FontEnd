@@ -6,13 +6,11 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 
 function Product(props) {
-    const { id, title, url, price, rating } = props;
+    const { id, title, url, price, rating, onClick } = props;
     const img = url;
-    // const img = url.startsWith('http') ? url : require(url);
-    // console.log(img);
 
     return (
-        <a href="#">
+        <a onClick={() => onClick(id)}>
             <div className={cx('product-item', 'row')}>
                 <div className={cx('product-img', 'col-md-6')}>
                     <img src={img} alt=""></img>

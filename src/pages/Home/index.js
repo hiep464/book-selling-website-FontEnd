@@ -6,15 +6,22 @@ import Product from './Product';
 // import Slider from 'react-slick';
 import Login from '../Login';
 import { useGetBooks } from '../../api/useBook';
+import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(style);
 
 function Home() {
-    const books = useGetBooks(
-        { page: 1, limit: 10 },
-        { maxPrice: 100000, minPrice: 0, sortBy: 'price', sortOrder: 'asc' },
-    );
+    const books = useGetBooks({ page: 1, limit: 10 }, { sortBy: 'price', sortOrder: 'asc' });
     console.log(books);
+
+    const navigate = useNavigate();
+    const navigateToBookDetail = useCallback(
+        (id) => {
+            navigate(`/bookdetail/${id}`);
+        },
+        [navigate],
+    );
 
     return (
         <main className={cx('homepage')}>
@@ -199,11 +206,9 @@ function Home() {
                                         title={book.title}
                                         rating={book.rating}
                                         price={book.price}
+                                        onClick={navigateToBookDetail}
                                     ></Product>
                                 ))}
-                                {/* <Product></Product>
-                                <Product></Product>
-                                <Product></Product> */}
                             </div>
                             <div className={cx('more-detail')}>
                                 <button type="button" className={cx('more-detail-btn')}>

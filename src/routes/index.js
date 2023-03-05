@@ -16,7 +16,8 @@ import Products from '../pages/Admin/Products';
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/categories', component: Categories },
-    { path: '/bookdetail', component: Bookdetail },
+    { path: '/bookdetail', component: Bookdetail }, // Note: deprecated, use '/bookdetail/:id' instead
+    { path: '/bookdetail/:id', component: Bookdetail },
     { path: '/login', component: Login },
     { path: '/profile', component: Profile, layout: ProfileLayout },
     { path: '/cart', component: Cart },
