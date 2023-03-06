@@ -16,13 +16,18 @@ import {
     faUser,
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
 import LoginItem from '../../../pages/Login/LoginItem';
 
 const cx = classNames.bind(styles);
-
 function Header() {
+    let user = false;
+    const data = useLocation();
+    if(data.state){
+        user = data.state.user
+    }
+    console.log(data);
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -31,8 +36,8 @@ function Header() {
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
 
-
-    const user = true;
+    
+    
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>

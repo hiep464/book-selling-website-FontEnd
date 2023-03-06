@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import * as userService from '../../../apiServices/userService';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 const userInfo = {
@@ -133,7 +134,12 @@ function LoginItem(data) {
                     ) : active ? (
                         <button>Đăng nhập</button>
                     ) : (
-                        <button onClick={register}>Đăng ký</button>
+                        <Link 
+                            to="/"
+                            state={{ user: true }}
+                        >
+                            <button onClick={register}>Đăng ký</button>
+                        </Link>
                     )}
                     {forget ? <button onClick={remoteFroget}>Quay lại</button> : ''}
                 </div>

@@ -2,19 +2,35 @@ import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as cartService from '../../../apiServices/cartService';
 
 const cx = classNames.bind(styles);
+const data = {quantity : 0}
 
-function CartItem({quantity}) {
+function CartItem({quantity, userId, bookId}) {
     const [quantityBook, setQuantityBook] = useState(quantity);
-
     const handlePlus = () => {
         setQuantityBook(quantityBook + 1);
     }
     const handleMinus = () => {
         if(quantityBook > 0)
             setQuantityBook(quantityBook - 1);
+    }
+    
+    useEffect(() => {
+        data.quantity = quantityBook;
+        const updateQuantity = async () => {
+            const res = await cartService.updateCart(bookId, userId, data);
+            console.log(res);
+        }
+        updateQuantity();
+    }, [quantityBook, bookId, userId])
+
+    const removeItem = async () => {
+        const res = await cartService.deleteItem(bookId,userId);
+        console.log(res);
+        // window.location.reload(false);
     }
 
     return (
@@ -47,7 +63,7 @@ function CartItem({quantity}) {
                 <span>140.000d</span>
             </div>
             <div className={cx('center', 'icon')}>
-                <FontAwesomeIcon icon={faTrashCan} />
+                <FontAwesomeIcon icon={faTrashCan} onClick={removeItem}/>
             </div>
         </div>
     );

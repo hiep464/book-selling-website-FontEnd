@@ -2,12 +2,13 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './style.module.scss';
-import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
 import * as feedBackService from '../../apiServices/feedbackServices';
+import * as cartService from '../../apiServices/cartService';
 import StarRatings from 'react-star-ratings';
 
 const cx = classNames.bind(style);
@@ -38,9 +39,15 @@ const stars = [
     { index: 1, sum: 0 },
 ];
 
+const data = {
+    quantity : 0
+}
+
 function Bookdetail() {
     const [counter, setCounter] = useState(1);
     const [feedbacks, setFeedback] = useState([]);
+    const [addCart, setAddCart] = useState(false);
+    const [arr, setArr] = useState(stars);
     const incrementCounter = () => setCounter(counter + 1);
     let decrementCounter = () => setCounter(counter - 1);
     if (counter <= 1) {
@@ -51,19 +58,41 @@ function Bookdetail() {
         const fetchApi = async () => {
             const result = await feedBackService.getAll(1);
             setFeedback(result.data);
-            result.data.map((count) => {
+            feedbacks.map((count) => {
                 stars.map((star) => {
                     if (count.star === star.index) star.sum++;
                     return 1;
                 });
                 return 1;
             });
+            setArr(stars);
+            console.log(arr);
+            return result;
         };
         fetchApi();
     }, []);
+    console.log(stars);
+    useEffect(() => {
+        data.quantity = counter;
+    }, [counter])
+
+    const addToCart = async () => {
+        setAddCart(true);
+        const res = await cartService.addToCart(1, 1, data);
+        setTimeout(setAddCart(false), 5000);
+        return res;
+    }
 
     return (
         <div className={cx('page-wrapper')}>
+            {addCart ? 
+            <div className={cx('add-cart-noti-wrap')}>
+                <div className={cx('add-cart-noti')}>
+                    <FontAwesomeIcon className={cx('add-cart-noti-icon')} icon={faCircleCheck}></FontAwesomeIcon>
+                    Thêm vào giỏ hàng thành công
+                </div>
+            </div>
+            : ''}
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -84,7 +113,7 @@ function Bookdetail() {
                             <img src={require('../../assets/images/book_detail/image_208345.jpg')} alt=""></img>
                             <div className={cx('thumbnail-btn', 'row')}>
                                 <div className={cx('more-detail', 'col-md-6')}>
-                                    <button type="button" className={cx('more-detail-btn')}>
+                                    <button type="button" className={cx('more-detail-btn')} onClick={addToCart}>
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>
@@ -246,21 +275,21 @@ function Bookdetail() {
                         </div>
                     </div>
                     <div className={cx('feedback-star', 'col-4')}>
-                        {stars.map((star) => (
-                            <div className={cx('feedback-star-block')}>
+                        {arr.map((star) => (
+                            <div key={star.index} className={cx('feedback-star-block')}>
                                 <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>{star.index} sao </span>
                                 <div className={cx('progress', 'feedback-star-point')}>
                                     <div
                                         class="progress-bar bg-warning"
                                         role="progressbar"
-                                        style={{ width: '100%' }}
-                                        aria-valuenow="75"
+                                        style={{ width: `${parseInt(star.sum / feedbacks.length * 100)}%`}}
+                                        aria-valuenow= {parseInt(star.sum / feedbacks.length * 100)}
                                         aria-valuemin="0"
                                         aria-valuemax="100"
                                     ></div>
                                 </div>
-                                <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>
-                                    {(star.sum / feedbacks.length) * 100}%
+                                <span style={{ fontSize: '1.5rem', margin: '0 0.7rem', width: '30px', textAlign: 'right'}}>
+                                    {(parseInt(star.sum / feedbacks.length * 100))}%
                                 </span>
                             </div>
                         ))}

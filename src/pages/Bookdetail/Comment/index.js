@@ -28,9 +28,9 @@ function Comment({star, userid, createat, feedback}) {
                         </div>
                     </div>
                     <div className={cx('comment-content')}>
-                        - Đóng gói cẩn thận, giao hàng rất nhanh - Nội dung được trình bày rất khoa học, dễ nhớ và rất
+                        {/* - Đóng gói cẩn thận, giao hàng rất nhanh - Nội dung được trình bày rất khoa học, dễ nhớ và rất
                         ngắn gọn. Sách sẽ cho chúng ta một cái nhìn tổng quan nhất về ngành khoa học tâm lý. Tuy nhiên
-                        sẽ hơi khô khan 1 chút vì là sách viết về khoa học.
+                        sẽ hơi khô khan 1 chút vì là sách viết về khoa học. */}
                         {feedback}
                     </div>
                 </div>
