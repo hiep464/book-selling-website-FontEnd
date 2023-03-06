@@ -19,7 +19,7 @@ function Product(props) {
                     <h5>{title}</h5>
                     <div className={cx('product-price')}>{price}</div>
                     <div className={cx('star')}>
-                        {new Array(rating).fill(1).map((_, i) => (
+                        {new Array(Number.parseInt(rating)).fill(1).map((_, i) => (
                             <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
                         ))}
                         <span>(sold)</span>

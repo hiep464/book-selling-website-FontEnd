@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function Item(props) {
-    const { id, title, price, coverUrl, star, numOfPages } = props;
+    const { id, title, price, coverUrl, rating, numOfPages } = props;
 
     return (
         <Link to={`/bookdetail/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
@@ -25,7 +25,7 @@ function Item(props) {
                     <span className={cx('volume')}>{numOfPages} pages</span>
                 </div>
                 <div className={cx('star')}>
-                    {new Array(star).fill(1).map((item, index) => {
+                    {new Array(Number.parseInt(rating)).fill(1).map((item, index) => {
                         return <FontAwesomeIcon className={cx('color')} icon={faStar} key={index} />;
                     })}
                     {/* <span>(sold)</span> */}
