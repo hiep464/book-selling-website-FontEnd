@@ -59,8 +59,8 @@ a:hover {
     color: #c92127 !important;
 }
 
-.thumbnail-btn {
-}
+// .thumbnail-btn {
+// }
 
 .more-detail-btn:hover {
     background-color: #c92127;
@@ -172,25 +172,21 @@ a:hover {
     font-size: 1.5rem;
 }
 
-
-.feedback-point{
+.feedback-point {
     font-weight: 700;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-
 }
 
-.feedback-point-quantity{
+.feedback-point-quantity {
     width: 100%;
     font-size: 1.2rem;
-
-
 }
 
-.feedback-block{
+.feedback-block {
     width: 100%;
     display: flex;
     align-items: center;
@@ -201,12 +197,12 @@ a:hover {
     width: 70%;
 }
 
-.feedback-point-star {
-    // width: 30%;
-}
+// .feedback-point-star {
+//     // width: 30%;
+// }
 
-.bookdetail-block-scope {
-}
+// .bookdetail-block-scope {
+// }
 
 .feedback-login {
     font-size: 1.3rem;
@@ -226,7 +222,7 @@ a:hover {
     border-bottom: 0.5px solid #333;
 }
 
-.newest > p{
+.newest > p {
     margin-bottom: 0;
     color: #c92127;
     font-size: 1.5rem;
@@ -262,4 +258,7 @@ a:hover {
     width: 50px;
     height: 50px;
     color: #00c7a3;
+}
+.comment-zone {
+    width: 100%;
 }
