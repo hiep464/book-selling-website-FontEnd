@@ -9,6 +9,7 @@ import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
 import { useGetBookDetail, useGetBookFeedback } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
+import Rating from './Rating';
 
 const cx = classNames.bind(style);
 
@@ -41,21 +42,21 @@ function Bookdetail() {
     return (
         <div className={cx('page-wrapper')}>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
                         <a href="#">Home</a>
                     </li>
-                    <li class="breadcrumb-item">
+                    <li className="breadcrumb-item">
                         <a href="#">Book Detail</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item active" aria-current="page">
                         Tên sách
                     </li>
                 </ol>
             </nav>
             {/* content */}
             <BookInfo {...book} />
-            <BookFeedback feedbackList={feedbackList} />
+            <BookFeedback feedbackList={feedbackList} bookId={bookId} />
             {/* content */}
         </div>
     );
@@ -230,7 +231,7 @@ function BookFeedback(props) {
                         <div className={cx('feedback-point-star')}>
                             <div className={cx('star')}>
                                 {new Array(Math.floor(rating)).fill(1).map((item, i) => (
-                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                                    <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
                                 ))}
                             </div>
                         </div>
@@ -244,7 +245,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="30"
@@ -258,7 +259,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>4 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -272,7 +273,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>3 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -286,7 +287,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>2 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -300,7 +301,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>1 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -316,6 +317,28 @@ function BookFeedback(props) {
                         Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="#">đăng nhập</a> hoặc
                         <a href="#"> đăng ký</a>.
                     </p>
+                    {/* <form
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start',
+                            paddingLeft: '10rem',
+                        }}
+                    >
+                        <label>
+                            <span>UserId (test):</span>
+                        </label>
+                        <br />
+                        <input id="userId" name="userId" />
+                        <br />
+                        <Rating />
+                        <label>
+                            <span>Message:</span>
+                        </label>
+                        <br />
+                        <input id="comment" name="comment" />
+                    </form> */}
                 </div>
             </div>
             <hr></hr>
@@ -326,7 +349,7 @@ function BookFeedback(props) {
                     </p>
                 </div>
                 {feedbackList.map((item, i) => (
-                    <Comment {...item} />
+                    <Comment {...item} key={i} />
                 ))}
             </div>
         </div>
