@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Item from './Product';
 import { useState } from 'react';
-import { useGetBooks } from '../../api/useBook';
+import { useGetBookCategories, useGetBooks } from '../../api/useBook';
 
 const cx = classNames.bind(styles);
 
@@ -26,10 +26,12 @@ const sortBy = [
 const pageSize = 20;
 
 function Categories() {
-    // const [category, setCategory] = useState(undefined);
+    const [category, setCategory] = useState(-1);
     const [priceRangeId, setPriceRangeId] = useState(-1);
     const [sortById, setSortById] = useState(0);
     const [page, setPage] = useState(1);
+
+    const categories = useGetBookCategories();
 
     const bookListResponse = useGetBooks(
         { page, limit: pageSize },
@@ -38,13 +40,11 @@ function Categories() {
             maxPrice: priceRanges[priceRangeId]?.max,
             sortBy: sortBy[sortById]?.value,
             sortType: sortBy[sortById]?.order,
+            category: category === -1 ? undefined : categories[category],
         },
     );
     const books = bookListResponse?.data || [];
-
-    const isChecked = (index) => {
-        return index === priceRangeId;
-    };
+    const numOfPages = Math.ceil(bookListResponse?.total / pageSize) || 1;
 
     const handleChangePriceRange = (index) => (e) => {
         if (e.target.checked) {
@@ -70,8 +70,23 @@ function Categories() {
                         </div>
                         <div className={cx('categories-list')}>
                             <ul className={cx('menu-list')}>
-                                <li>Sách tiếng việt</li>
-                                <li>Sách tiếng anh</li>
+                                <select
+                                    id="data-type"
+                                    value={category}
+                                    onChange={(e) => {
+                                        setCategory(e.target.value);
+                                        console.log(category);
+                                    }}
+                                >
+                                    <option value={-1}>Tất cả</option>
+                                    {categories?.map((category, index) => {
+                                        return (
+                                            <option key={index} value={index}>
+                                                {category}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
                             </ul>
                         </div>
                         <div className={cx('price')}>
@@ -150,7 +165,13 @@ function Categories() {
                         </select>
                     </div>
                     {/* BookList */}
-                    <BookList books={books} />
+                    <BookList
+                        books={books}
+                        pageSize={pageSize}
+                        numOfPages={numOfPages}
+                        currentPageNum={page}
+                        onChangePage={(pageId) => setPage(pageId)}
+                    />
                 </div>
             </div>
         </div>
