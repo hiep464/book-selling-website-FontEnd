@@ -5,6 +5,12 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
+/**
+ * A custom hook that uses the useMutation hook from react-query to perform a login operation.
+ * @param {(((data: boolean, variables: void, context: unknown) => void | Promise<unknown>) | undefined)?} onSuccess - A callback function to be called on successful login.
+ * @param {(((error: unknown, variables: void, context: unknown) => void | Promise<unknown>) | undefined)?} onError - A callback function to be called if an error occurs during login.
+ * @returns {Object} - The mutation object returned by the useMutation hook.
+ */
 export const useLogin = ({ onSuccess, onError }) => {
     const { login, logout } = useContext(AuthContext);
 
@@ -49,18 +55,8 @@ export const useLogout = () => {
     return mutation;
 };
 
-const useRegister = () => {
-    const mutation = useMutation({
-        mutationFn: async (authData) => {
-            const { email, password, username } = authData;
-            if (!email || !password || !username) return false;
-
-            const userResult = await axios.post(`/users`, { email, password, username });
-            if (userResult.status !== 201) return false;
-
-            return true;
-        },
-    });
+export const useRegister = () => {
+    const mutation = usePost(`${apiBaseUrl}/users`, {});
 
     return mutation;
 };

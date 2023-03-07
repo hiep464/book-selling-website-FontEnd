@@ -7,7 +7,8 @@ import Product from './Product';
 import Login from '../Login';
 import { useGetBooks } from '../../api/useBook';
 import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useRegister } from '../../api/useAuth';
 
 const cx = classNames.bind(style);
 
