@@ -17,6 +17,7 @@ function CartItem({quantity, userId, bookId}) {
         if(quantityBook > 0)
             setQuantityBook(quantityBook - 1);
     }
+    const [active, setActive] = useState(false);
     
     useEffect(() => {
         data.quantity = quantityBook;
@@ -28,13 +29,13 @@ function CartItem({quantity, userId, bookId}) {
     }, [quantityBook, bookId, userId])
 
     const removeItem = async () => {
+        setActive(true);
         const res = await cartService.deleteItem(bookId,userId);
-        console.log(res);
-        // window.location.reload(false);
+        return res;
     }
 
     return (
-        <div className={cx('item-wrapper')}>
+        <div className={cx('item-wrapper', active ? 'disable' : '')}>
             <div style={{ width: '48px' }} className={cx('center')}>
                 <input type="checkbox" />
             </div>

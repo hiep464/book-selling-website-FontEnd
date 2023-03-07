@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import Rating from './Rating';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import StarRatings from 'react-star-ratings';
 
@@ -96,7 +97,7 @@ function BookInfo(props) {
         width,
         numOfPages,
     } = props;
-
+    console.log(rating);
     const img = coverUrl;
     // require('../../assets/images/book_detail/image_208345.jpg')
 
@@ -111,11 +112,15 @@ function BookInfo(props) {
 
     const { state } = useContext(AuthContext);
     const { mutate: addBookToCart } = useAddBookToCart(id, state['userId'], counter);
-
+    const navigate = useNavigate();
     const handleAddCart = () => {
-        setAddcart(true);
-        addBookToCart({ quantity: counter });
-        setTimeout(()=>setAddcart(false), 1000);
+        if(state['isLogin']){
+            setAddcart(true);
+            addBookToCart({ quantity: counter });
+            setTimeout(()=>setAddcart(false), 1000);
+        }else{
+            navigate('/login');
+        }
     };
 
     return (
@@ -176,12 +181,12 @@ function BookInfo(props) {
                         </div>
 
                         <div className={cx('star')}>
+                            {/* <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            {/* <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" /> */}
+                            <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
+                            <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>
@@ -265,9 +270,10 @@ function BookFeedback(props) {
                         </div>
                         <div className={cx('feedback-point-star')}>
                             <div className={cx('star')}>
-                                {new Array(Math.floor(rating)).fill(1).map((item, i) => (
+                                {/* {new Array(Math.floor(rating)).fill(1).map((item, i) => (
                                     <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
-                                ))}
+                                ))} */}
+                                <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="18px" starSpacing="1px" />
                             </div>
                         </div>
                         <div className={cx('feedback-point-quantity')} style={{ fontSize: '13px', fontWeight: '500' }}>

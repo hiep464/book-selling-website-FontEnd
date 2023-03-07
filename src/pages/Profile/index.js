@@ -1,21 +1,20 @@
 import classNames from 'classnames/bind';
 import styles from './profile.module.scss';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Profile({ children }) {
+    const { state } = useContext(AuthContext);
     return (
         <div className={cx('wrapper')}>
             <header className={cx('profile-header')}>Thông tin tài khoản</header>
             <div className={cx('profile-body')}>
                 <form className={cx('profile-body-form')}>
                     <div className={cx('item')}>
-                        <div className={cx('item-name')}>Họ*</div>
-                        <input className={cx('item-input-text')} type="text" value="Lưu"></input>
-                    </div>
-                    <div className={cx('item')}>
-                        <div className={cx('item-name')}>Tên*</div>
-                        <input className={cx('item-input-text')} type="text" value="Hiệp"></input>
+                        <div className={cx('item-name')}>Tên</div>
+                        <input className={cx('item-input-text')} type="text" value={state['username']}></input>
                     </div>
                     <div className={cx('item')}>
                         <div className={cx('item-name')}>Số điện thoại</div>

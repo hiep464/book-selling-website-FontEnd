@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import { useLogin, useRegister } from '../../../api/useAuth';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,14 +10,6 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-const userInfo = {
-    email: '',
-    name: '',
-    password: '',
-    role: 'USER',
-    gender: 'MALE',
-    phone: '',
-};
 function LoginItem(data) {
     const [active, setActive] = useState(data.data);
     const addActive = () => setActive(true);
@@ -84,6 +76,10 @@ function LoginItem(data) {
             setLoading(false);
             // }
         },
+        onError: () => {
+            setLoading(false);
+            setErr(true);
+        }
     });
     const { mutate: register } = useRegister({
         onSuccess: () => {
@@ -95,7 +91,6 @@ function LoginItem(data) {
         onError: () => {
             setLoading(false);
             setErr(true);
-            console.log(4);
         }
     });
 
@@ -123,7 +118,7 @@ function LoginItem(data) {
                     <div className={cx('noti-err')}>
                         <div className={cx('noti-err-header')}>
                             <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')}/>
-                            <span>email đã tồn tại</span>
+                            <span>Error</span>
                         </div>
                         <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>OK</button>
                     </div>

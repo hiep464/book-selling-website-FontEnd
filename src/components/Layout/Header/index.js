@@ -69,47 +69,6 @@ function Header() {
                     </Link>
                 </div>
 
-                {/* <HeadlessTippy
-                    visible={visible}
-                    onClickOutside={hide}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <div className={cx('search-result1')}>
-                                <FontAwesomeIcon icon={faArrowTrendUp} className={cx('search-result-icon')} />
-                                <span>Từ khóa Hot</span>
-                                <div className={cx('search-result1-menu')}>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                </div>
-                            </div>
-                            <div className={cx('search-result2')}>
-                                <FontAwesomeIcon icon={faList} className={cx('search-result-icon')} />
-                                <span>Danh mục nổi bật</span>
-                                <div className={cx('search-result2-menu')}>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input
-                            className={cx('search-input')}
-                            placeholder="Tim kiếm sản phẩm mong muốn..."
-                            onClick={show}
-                        ></input>
-                        <button>
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </div>
-                </HeadlessTippy> */}
                 <div className={cx('search')}>
                     <input
                         className={cx('search-input')}
@@ -283,10 +242,20 @@ function Header() {
                     >
                         <div className={cx('account', 'common-header', 'no-margin-right')}>
                             {user ? (
-                                <Fragment>
+                                <Link
+                                    to="/profile"
+                                    style={{
+                                        textDecoration: 'none',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        flexDirection: 'column',
+                                        color: '#7a7e7f',
+                                    }}
+                                >
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faUserGraduate} />
                                     <span>User</span>
-                                </Fragment>
+                                </Link>
                             ) : (
                                 <Link
                                     to="/login"
