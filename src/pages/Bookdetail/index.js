@@ -2,14 +2,16 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './style.module.scss';
-import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
-import { useGetBookDetail, useGetBookFeedback } from '../../api/useBook';
+import { useGetBookDetail, useGetBookFeedback, useAddBookToCart } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
 import Rating from './Rating';
+
+import StarRatings from 'react-star-ratings';
 
 const cx = classNames.bind(style);
 
@@ -35,12 +37,18 @@ function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-
+    console.log(book)
     const bookFeedbackResponse = useGetBookFeedback(bookId);
     const feedbackList = bookFeedbackResponse?.data;
 
     return (
         <div className={cx('page-wrapper')}>
+            {/* <div className={cx('add-cart-noti-wrap')}>
+                <div className={cx('add-cart-noti')}>
+                    <FontAwesomeIcon className={cx('add-cart-noti-icon')} icon={faCircleCheck}></FontAwesomeIcon>
+                    Thêm vào giỏ hàng thành công
+                </div>
+            </div> */}
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
@@ -79,6 +87,7 @@ function BookInfo(props) {
         price,
         publishDate,
         publisher,
+        rating,
         supplier,
         updatedAt,
         weight,
@@ -105,7 +114,7 @@ function BookInfo(props) {
                             <img src={img} alt=""></img>
                             <div className={cx('thumbnail-btn', 'row')}>
                                 <div className={cx('more-detail', 'col-md-6')}>
-                                    <button type="button" className={cx('more-detail-btn')}>
+                                    <button type="button" className={cx('more-detail-btn')} >
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>
@@ -146,7 +155,7 @@ function BookInfo(props) {
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <span>(sold)</span>
+                            {/* <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" /> */}
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>

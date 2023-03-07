@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 function Login() {
     const data = useLocation();
-    console.log(data);
+    
     let login;
     if (data.state) {
         login = data.state.login;

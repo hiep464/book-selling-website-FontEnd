@@ -1,44 +1,110 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
-import { useLogin } from '../../../api/useAuth';
+import { useLogin, useRegister } from '../../../api/useAuth';
 import { redirect, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
+import ReactLoading from 'react-loading';
 
 const cx = classNames.bind(styles);
 
+const userInfo = {
+    email: '',
+    name: '',
+    password: '',
+    role: 'USER',
+    gender: 'MALE',
+    phone: '',
+};
 function LoginItem(data) {
     const [active, setActive] = useState(data.data);
     const addActive = () => setActive(true);
     const remoteActive = () => setActive(false);
-    console.log(data.data);
 
     const [forget, setForget] = useState(false);
     const addForget = () => setForget(true);
     const remoteFroget = () => setForget(false);
 
+    const [loading, setLoading] = useState(false);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [passwordErr, setPasswordErr] = useState('');
+    const [confirmPasswordErr, setConfirmPasswordErr] = useState('');
+    const handleValidationPass = () => {
+        //for password
+        const uppercaseRegExp = /(?=.*?[A-Z])/;
+        const lowercaseRegExp = /(?=.*?[a-z])/;
+        const digitsRegExp = /(?=.*?[0-9])/;
+        const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+        const minLengthRegExp = /.{8,}/;
+        const passwordLength = password.length;
+        const uppercasePassword = uppercaseRegExp.test(password);
+        const lowercasePassword = lowercaseRegExp.test(password);
+        const digitsPassword = digitsRegExp.test(password);
+        const specialCharPassword = specialCharRegExp.test(password);
+        const minLengthPassword = minLengthRegExp.test(password);
+        let errMsg = '';
+        if (passwordLength === 0) {
+            errMsg = 'Password is empty';
+        } else if (!uppercasePassword) {
+            errMsg = 'At least one Uppercase';
+        } else if (!lowercasePassword) {
+            errMsg = 'At least one Lowercase';
+        } else if (!digitsPassword) {
+            errMsg = 'At least one digit';
+        } else if (!specialCharPassword) {
+            errMsg = 'At least one Special Characters';
+        } else if (!minLengthPassword) {
+            errMsg = 'At least minumum 8 characters';
+        } else {
+            errMsg = '';
+        }
+        setPasswordErr(errMsg);
+    };
 
-    const { state } = useContext(AuthContext);
-    const { mutate: login, data: loginData } = useLogin({
-        onSuccess: () => {
-            // if (state['isLogin']) {
-            navigate('/');
-            console.log(state);
-            // }
-        },
-    });
+    const handleValidationPassConfirm = () => {
+        if (!(passwordConfirm === password)) {
+            setConfirmPasswordErr('Confirm password is not matched');
+        } else {
+            setConfirmPasswordErr('');
+        }
+    };
+
     const navigate = useNavigate();
+    // const { state } = useContext(AuthContext);
+    const handleMutationEvent = {
+        onSuccess: () => {
+            navigate('/');
+            setLoading(false);
+        },
+        onError: () => {
+            setLoading(false);
+        },
+    };
+    const { mutate: login, data: loginData } = useLogin(handleMutationEvent);
+    const { mutate: register } = useRegister(handleMutationEvent);
 
     const handleSubmit = () => {
         if (active === true && forget === false) {
+            setLoading(true);
             login({ email, password });
+        } else if (active === false && forget === false) {
+            setLoading(true);
+            register({ email, password });
         }
     };
 
     return (
         <div className={cx('form')}>
+            {loading ? (
+                <div className={cx('loading')}>
+                    <ReactLoading type={'spinningBubbles'} color={'#0288d1'} />
+                </div>
+            ) : (
+                ''
+            )}
             {forget ? (
                 <header className={cx('form-header-forget')}>Khôi phục mật khẩu</header>
             ) : (
@@ -73,20 +139,28 @@ function LoginItem(data) {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
+                            onKeyUp={handleValidationPass}
                         />
+                        <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p>
                     </div>
                     {active ? (
                         ''
                     ) : (
                         <div className={cx('pass-check')}>
                             <h4>{forget ? 'Xác nhận mật khẩu mới :' : 'Xác nhận mật khẩu :'}</h4>
-                            <input type="password" className={cx('password')} />
+                            <input
+                                type="password"
+                                className={cx('password')}
+                                onChange={(e) => setPasswordConfirm(e.target.value)}
+                                onKeyUp={handleValidationPassConfirm}
+                            />
+                            <p style={{ color: 'red' }}>{forget ? '' : confirmPasswordErr}</p>
                         </div>
                     )}
                     {forget ? (
                         <div className={cx('newpass-check')}>
                             <h4>Xác nhận mật khẩu :</h4>
-                            <input type="password" className={cx('password')} />
+                            <input type="password" className={cx('password')} onKeyUp={handleValidationPassConfirm} />
                         </div>
                     ) : (
                         ''

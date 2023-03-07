@@ -6,17 +6,13 @@ import {
     faArrowTrendUp,
     faBell,
     faCartShopping,
-    faCircleChevronRight,
-    faClipboardList,
-    faCrown,
     faList,
     faLock,
     faSearch,
-    faSignOut,
     faUser,
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
 import LoginItem from '../../../pages/Login/LoginItem';
 import HeaderProfile from './HeaderProfile';
@@ -24,17 +20,27 @@ import HeaderRegister from './HeaderRegister';
 import { AuthContext } from '../../../context/AuthContext';
 
 const cx = classNames.bind(styles);
-
 function Header() {
+    let user = false;
+    const data = useLocation();
+    if (data.state) {
+        user = data.state.user;
+    }
+
+    const { state, logout } = useContext(AuthContext);
+
+    if (state['isLogin']) user = true;
+    // console.log(data);
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
 
     const [disable, setDisable] = useState(false);
-    const addDisable = () => setDisable(true);
+    // const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
+    // const navigate = useNavigate();
+    // const {mutate: logout} = useLogout();
 
-    const { state, logout } = useContext(AuthContext);
     const { isLogin, username } = state;
 
     const navigate = useNavigate();
@@ -44,6 +50,11 @@ function Header() {
         },
         [navigate],
     );
+
+    // const handleLogout = () => {
+    //     logout();
+    //     navigate('/');
+    // };
 
     return (
         <header className={cx('wrapper')}>
@@ -195,6 +206,49 @@ function Header() {
                                     onNavigateToOrder={handleNavigateToOrder}
                                 />
                             ) : (
+                                // =======
+                                //                             user ? (
+                                //                                 <div className={cx('account-logined')} tabIndex="-1" {...attrs}>
+                                //                                     <div className={cx('account-logined-wrapper')}>
+                                //                                         <Link to="/profile" style={{ textDecoration: 'none' }}>
+                                //                                             <header className={cx('account-logined-header')}>
+                                //                                                 <div className={cx('header-left')}>
+                                //                                                     <FontAwesomeIcon
+                                //                                                         className={cx('header-left-icon')}
+                                //                                                         icon={faCrown}
+                                //                                                     />
+                                //                                                     <div className={cx('header-left-info')}>
+                                //                                                         <h4>User name</h4>
+                                //                                                         <h5>Thành viên của h3.com</h5>
+                                //                                                     </div>
+                                //                                                 </div>
+                                //                                                 <FontAwesomeIcon
+                                //                                                     className={cx('header-right')}
+                                //                                                     icon={faCircleChevronRight}
+                                //                                                 />
+                                //                                             </header>
+                                //                                         </Link>
+                                //                                         <div className={cx('account-logined-item-wrapper')}>
+                                //                                             <div className={cx('account-logined-item')}>
+                                //                                                 <FontAwesomeIcon
+                                //                                                     className={cx('account-logined-item-icon')}
+                                //                                                     icon={faClipboardList}
+                                //                                                 />
+                                //                                                 <span>Đơn hàng của tôi</span>
+                                //                                             </div>
+                                //                                         </div>
+                                //                                         <div className={cx('account-logined-item-wrapper', 'no-border')}>
+                                //                                             <button className={cx('account-logined-item')} onClick={handleLogout}>
+                                //                                                 <FontAwesomeIcon
+                                //                                                     className={cx('account-logined-item-icon')}
+                                //                                                     icon={faSignOut}
+                                //                                                 />
+                                //                                                 <span>Thoát tài khoản</span>
+                                //                                             </button>
+                                //                                         </div>
+                                //                                     </div>
+                                //                                 </div>
+                                // >>>>>>> feature/register-cart-feedback
                                 <HeaderRegister attrs={attrs} />
                             )
                         }
