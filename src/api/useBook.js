@@ -14,6 +14,11 @@ export const useGetBookDetail = (bookId) => {
     return getApiResponseData(result);
 };
 
+export const useGetBookInCart = (userId) => {
+    const result = useFetch(`${apiBaseUrl}/users/${userId}/cart`, {}, {});
+    return getApiResponseData(result);
+};
+
 export const useGetBookFeedback = (bookId) => {
     const result = useFetch(`${apiBaseUrl}/feedback`, { bookId }, {});
     return getApiResponseData(result);
@@ -24,7 +29,7 @@ export const useGetBookCategories = () => {
     return result?.data;
 };
 
-export const useAddBookToCart = (bookId, userId, data) =>{
-    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, data, {});
-    return result?.data;
+export const useAddBookToCart = (bookId, userId) =>{
+    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {},() => {});
+    return result;
 }

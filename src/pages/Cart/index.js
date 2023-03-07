@@ -1,29 +1,36 @@
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import CartItem from './CartItem';
-import { useEffect, useState } from 'react';
-import * as cartService from '../../apiServices/cartService';
+import { useState, useContext } from 'react';
 import ReactLoading from "react-loading";
+import { AuthContext } from '../../context/AuthContext';
+import {useGetBookInCart} from '../../api/useBook';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-    const [cart, setCart] = useState([]);
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        const fetchApi = async () => {
-            setLoading(true);
-            const result = await cartService.getCart(1);
-            setCart(result.data);
-            console.log(result.data);
-            setLoading(false);
-        };
-        fetchApi();
-    }, []);
+    // const [cart, setCart] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    
+    // useEffect(() => {
+    //     const fetchApi = async () => {
+    //         setLoading(true);
+    //         const result = await cartService.getCart(1);
+    //         setCart(result.data);
+    //         console.log(result.data);
+    //         setLoading(false);
+    //     };
+    //     fetchApi();
+    // }, []);
+
+    const { state } = useContext(AuthContext);
+    const cart = useGetBookInCart(state['userId']);
+    const cartList = cart?.data;
+
     return (
         <div className={cx('page-wrapper')}>
-            {loading ? <div className={cx('loading')}><ReactLoading type={'spinningBubbles'} color={'#ccc'} /></div> : ''}
-            <header className={cx('page-title')}>Gio hang (x san pham)</header>
+            {/* {loading ? <div className={cx('loading')}><ReactLoading type={'spinningBubbles'} color={'#ccc'} /></div> : ''} */}
+            <header className={cx('page-title')}>Giỏ Hàng ({cartList.length} sản phẩm)</header>
             <div className={cx('cart-wrapper')}>
                 <div className={cx('cart-left')}>
                     <div className={cx('cart-navbar')}>
@@ -41,7 +48,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className={cx('cart-item')}>
-                        {cart.map((item) => (
+                        {cartList.map((item) => (
                             <CartItem
                                 key={item.bookId}
                                 quantity={item.quantity}

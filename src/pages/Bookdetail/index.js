@@ -10,6 +10,8 @@ import Comment from './Comment';
 import { useGetBookDetail, useGetBookFeedback, useAddBookToCart } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
 import Rating from './Rating';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 import StarRatings from 'react-star-ratings';
 
@@ -37,7 +39,7 @@ function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-    console.log(book)
+    console.log(book);
     const bookFeedbackResponse = useGetBookFeedback(bookId);
     const feedbackList = bookFeedbackResponse?.data;
 
@@ -105,16 +107,40 @@ function BookInfo(props) {
         decrementCounter = () => setCounter(1);
     }
 
+    const [addcart, setAddcart] = useState(false);
+
+    const { state } = useContext(AuthContext);
+    const { mutate: addBookToCart } = useAddBookToCart(id, state['userId'], counter);
+
+    const handleAddCart = () => {
+        setAddcart(true);
+        addBookToCart({ quantity: counter });
+        setTimeout(()=>setAddcart(false), 1000);
+    };
+
     return (
         <>
             <div className={cx('bookdetail-wrapper')}>
+                {
+                    addcart ? (
+                        <div className={cx('add-cart-noti-wrap')}>
+                            <div className={cx('add-cart-noti')}>
+                                <FontAwesomeIcon
+                                    className={cx('add-cart-noti-icon')}
+                                    icon={faCircleCheck}
+                                ></FontAwesomeIcon>
+                                Thêm vào giỏ hàng thành công
+                            </div>
+                        </div>
+                    ) : ''
+                }
                 <div className={cx('row')}>
                     <div className={cx('bookdetail-thumbnail', 'col-md-5')}>
                         <div className={cx('thumbnail-img')}>
                             <img src={img} alt=""></img>
                             <div className={cx('thumbnail-btn', 'row')}>
                                 <div className={cx('more-detail', 'col-md-6')}>
-                                    <button type="button" className={cx('more-detail-btn')} >
+                                    <button type="button" className={cx('more-detail-btn')} onClick={handleAddCart}>
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>

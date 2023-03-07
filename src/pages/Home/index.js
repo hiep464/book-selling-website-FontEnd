@@ -4,7 +4,6 @@ import { faListUl } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Product from './Product';
 // import Slider from 'react-slick';
-import Login from '../Login';
 import { useGetBooks } from '../../api/useBook';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
@@ -219,8 +218,6 @@ function Home() {
                     </div>
                 </div>
             </div>
-
-            <Login />
         </main>
     );
 }

@@ -5,6 +5,8 @@ import { useLogin, useRegister } from '../../../api/useAuth';
 import { redirect, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +28,7 @@ function LoginItem(data) {
     const remoteFroget = () => setForget(false);
 
     const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -77,9 +80,7 @@ function LoginItem(data) {
     const { mutate: login, data: loginData } = useLogin({
         onSuccess: () => {
             // if (state['isLogin']) {
-            console.log(3);
             navigate('/');
-            console.log(2);
             setLoading(false);
             // }
         },
@@ -91,11 +92,16 @@ function LoginItem(data) {
             setLoading(false);
             // }
         },
+        onError: () => {
+            setLoading(false);
+            setErr(true);
+            console.log(4);
+        }
     });
 
     const handleSubmit = () => {
         if (active === true && forget === false) {
-            // setLoading(true);
+            setLoading(true);
             login({ email, password });
         } else if (active === false && forget === false) {
             setLoading(true);
@@ -112,6 +118,18 @@ function LoginItem(data) {
             ) : (
                 ''
             )}
+            {err ? (
+                <div className={cx('noti-err-wrapper')}>
+                    <div className={cx('noti-err')}>
+                        <div className={cx('noti-err-header')}>
+                            <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')}/>
+                            <span>email đã tồn tại</span>
+                        </div>
+                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>OK</button>
+                    </div>
+                </div>
+            ) : ''
+            }
             {forget ? (
                 <header className={cx('form-header-forget')}>Khôi phục mật khẩu</header>
             ) : (
@@ -146,9 +164,9 @@ function LoginItem(data) {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
-                            onKeyUp={handleValidationPass}
+                            onKeyUp={!active ? handleValidationPass : () => {}}
                         />
-                        <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p>
+                        {!active ? <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p> : ''}
                     </div>
                     {active ? (
                         ''

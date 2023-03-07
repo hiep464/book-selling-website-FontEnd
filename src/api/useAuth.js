@@ -50,7 +50,7 @@ export const useLogout = () => {
     return mutation;
 };
 
-export const useRegister = ({onSuccess}) => {
+export const useRegister = ({onSuccess, onError}) => {
     const { login } = useContext(AuthContext);
     const mutation = useMutation({
         mutationFn: async (authData) => {
@@ -72,8 +72,9 @@ export const useRegister = ({onSuccess}) => {
             const user = userResult.data;
             login(user.id, accessToken, name);
             return true;
-            }
-            ,onSuccess
+            },
+            onSuccess,
+            onError
         });
 
     return mutation;
