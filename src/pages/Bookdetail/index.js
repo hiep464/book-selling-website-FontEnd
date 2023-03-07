@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './style.module.scss';
 import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
-import { useGetBookDetail, useGetBookFeedback } from '../../api/useBook';
+import { useGetBookDetail, useGetBookFeedback, useAddBookToCart } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
+
+import StarRatings from 'react-star-ratings';
 
 const cx = classNames.bind(style);
 
@@ -30,65 +32,22 @@ function Display(props) {
     return <label style={{ marginLeft: '.5rem' }}>{props.message}</label>;
 }
 
-const stars = [
-    { index: 5, sum: 0 },
-    { index: 4, sum: 0 },
-    { index: 3, sum: 0 },
-    { index: 2, sum: 0 },
-    { index: 1, sum: 0 },
-];
-
-const data = {
-    quantity : 0
-}
-
 function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-
+    console.log(book)
     const bookFeedbackResponse = useGetBookFeedback(bookId);
     const feedbackList = bookFeedbackResponse?.data;
 
-    useEffect(() => {
-        const fetchApi = async () => {
-            const result = await feedBackService.getAll(1);
-            setFeedback(result.data);
-            feedbacks.map((count) => {
-                stars.map((star) => {
-                    if (count.star === star.index) star.sum++;
-                    return 1;
-                });
-                return 1;
-            });
-            setArr(stars);
-            console.log(arr);
-            return result;
-        };
-        fetchApi();
-    }, []);
-    console.log(stars);
-    useEffect(() => {
-        data.quantity = counter;
-    }, [counter])
-
-    const addToCart = async () => {
-        setAddCart(true);
-        const res = await cartService.addToCart(1, 1, data);
-        setTimeout(setAddCart(false), 5000);
-        return res;
-    }
-
     return (
         <div className={cx('page-wrapper')}>
-            {addCart ? 
-            <div className={cx('add-cart-noti-wrap')}>
+            {/* <div className={cx('add-cart-noti-wrap')}>
                 <div className={cx('add-cart-noti')}>
                     <FontAwesomeIcon className={cx('add-cart-noti-icon')} icon={faCircleCheck}></FontAwesomeIcon>
                     Thêm vào giỏ hàng thành công
                 </div>
-            </div>
-            : ''}
+            </div> */}
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -127,6 +86,7 @@ function BookInfo(props) {
         price,
         publishDate,
         publisher,
+        rating,
         supplier,
         updatedAt,
         weight,
@@ -153,7 +113,7 @@ function BookInfo(props) {
                             <img src={img} alt=""></img>
                             <div className={cx('thumbnail-btn', 'row')}>
                                 <div className={cx('more-detail', 'col-md-6')}>
-                                    <button type="button" className={cx('more-detail-btn')} onClick={addToCart}>
+                                    <button type="button" className={cx('more-detail-btn')} >
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>
@@ -189,13 +149,12 @@ function BookInfo(props) {
                         </div>
 
                         <div className={cx('star')}>
-                            {/* <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
-                            <StarRatings rating={4} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
-                            <span>(sold)</span>
+                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
+                            {/* <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" /> */}
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>
@@ -279,9 +238,15 @@ function BookFeedback(props) {
                         </div>
                         <div className={cx('feedback-point-star')}>
                             <div className={cx('star')}>
-                                {new Array(Math.floor(rating)).fill(1).map((item, i) => (
+                                {/* {new Array(Math.floor(rating)).fill(1).map((item, i) => (
                                     <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                                ))}
+                                ))} */}
+                                <StarRatings
+                                    rating={rating}
+                                    starRatedColor="#ffc107"
+                                    starDimension="18px"
+                                    starSpacing="1px"
+                                />
                             </div>
                         </div>
                         <div className={cx('feedback-point-quantity')} style={{ fontSize: '13px', fontWeight: '500' }}>

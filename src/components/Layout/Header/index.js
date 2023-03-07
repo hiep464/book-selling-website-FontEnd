@@ -27,7 +27,7 @@ function Header() {
     if(data.state){
         user = data.state.user
     }
-    console.log(data);
+    // console.log(data);
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);

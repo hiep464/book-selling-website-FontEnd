@@ -43,6 +43,7 @@ function Categories() {
             category: category === -1 ? undefined : categories[category],
         },
     );
+    console.log(bookListResponse);
     const books = bookListResponse?.data || [];
     const numOfPages = Math.ceil(bookListResponse?.total / pageSize) || 1;
 
