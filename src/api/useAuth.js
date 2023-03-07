@@ -27,7 +27,8 @@ export const useLogin = ({ onSuccess, onError }) => {
 
             const user = userResult.data;
             login(user.id, accessToken, user.username);
-
+            console.log(authResult);
+            console.log(userResult);
             return true;
         },
         onSuccess,
@@ -49,18 +50,31 @@ export const useLogout = () => {
     return mutation;
 };
 
-const useRegister = () => {
+export const useRegister = ({onSuccess}) => {
+    const { login } = useContext(AuthContext);
     const mutation = useMutation({
         mutationFn: async (authData) => {
-            const { email, password, username } = authData;
-            if (!email || !password || !username) return false;
-
-            const userResult = await axios.post(`/users`, { email, password, username });
+            const { email, password } = authData;
+            if (!email || !password) return false;
+            const name = "";
+            const role = "USER";
+            const gender = "MALE";
+            const phone = "";
+            const userResult = await axios.post(`${apiBaseUrl}/user`, { email, name, password, role, gender, phone });
+            console.log(userResult);
             if (userResult.status !== 201) return false;
+            if (userResult.data.length === 0) return false;
 
+            const authResult = await axios.post(`${apiBaseUrl}/auth/signin`, { email, password });
+            if (authResult.status >= 400) return false;
+            const accessToken = authResult.data['access_token'];
+            console.log(authResult);
+            const user = userResult.data;
+            login(user.id, accessToken, name);
             return true;
-        },
-    });
+            }
+            ,onSuccess
+        });
 
     return mutation;
 };

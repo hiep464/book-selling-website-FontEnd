@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,8 +17,12 @@ import {
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
 import LoginItem from '../../../pages/Login/LoginItem';
+
+import { AuthContext } from '../../../context/AuthContext';
+import { useLogout } from '../../../api/useAuth';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -27,6 +31,9 @@ function Header() {
     if(data.state){
         user = data.state.user
     }
+    const { state } = useContext(AuthContext);
+    if(state['isLogin'])
+        user = true;
     // console.log(data);
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
@@ -35,8 +42,13 @@ function Header() {
     const [disable, setDisable] = useState(false);
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
+    const navigate = useNavigate();
+    const {mutate: logout} = useLogout();
 
-    
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }
     
     return (
         <header className={cx('wrapper')}>
@@ -205,13 +217,13 @@ function Header() {
                                             </div>
                                         </div>
                                         <div className={cx('account-logined-item-wrapper', 'no-border')}>
-                                            <div className={cx('account-logined-item')}>
+                                            <button className={cx('account-logined-item')} onClick={handleLogout}>
                                                 <FontAwesomeIcon
                                                     className={cx('account-logined-item-icon')}
                                                     icon={faSignOut}
                                                 />
                                                 <span>Thoát tài khoản</span>
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

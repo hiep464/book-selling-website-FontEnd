@@ -327,16 +327,19 @@
     border-bottom: 1px solid #ccc;
     cursor: pointer;
 
-    &:hover{
-        background-color: #ccc;
-    }
 }
 
 .account-logined-item{
     display: flex;
     align-items: center;
     padding: 10px 0 8px 14px;
+    border: none;
+    background-color: white;
+    width: 100%;
 
+    &:hover{
+        background-color: #ccc;
+    }
     .account-logined-item-icon{
         margin: 0 8px;
         width: 18px;
