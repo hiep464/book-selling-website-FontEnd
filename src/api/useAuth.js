@@ -5,6 +5,11 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
+export const useGetProfile = (userId) => {
+    const query = useFetch(`${apiBaseUrl}/users/${userId}`, {});
+    return query.data;
+};
+
 /**
  * A custom hook that uses the useMutation hook from react-query to perform a login operation.
  * @param {(((data: boolean, variables: void, context: unknown) => void | Promise<unknown>) | undefined)?} onSuccess - A callback function to be called on successful login.
@@ -32,7 +37,7 @@ export const useLogin = ({ onSuccess, onError }) => {
             if (userResult.data.length === 0) return false;
 
             const user = userResult.data;
-            login(user.id, accessToken, user.username);
+            login(user.id, accessToken, user.email);
 
             return true;
         },

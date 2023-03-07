@@ -23,9 +23,10 @@ function LoginItem(data) {
     const { state } = useContext(AuthContext);
     const { mutate: login, data: loginData } = useLogin({
         onSuccess: () => {
-            if (state['isLogin']) {
-                navigate('/');
-            }
+            // if (state['isLogin']) {
+            navigate('/');
+            console.log(state);
+            // }
         },
     });
     const navigate = useNavigate();

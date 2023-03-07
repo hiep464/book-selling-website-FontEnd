@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useContext, useState } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,9 +16,12 @@ import {
     faUser,
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
 import LoginItem from '../../../pages/Login/LoginItem';
+import HeaderProfile from './HeaderProfile';
+import HeaderRegister from './HeaderRegister';
+import { AuthContext } from '../../../context/AuthContext';
 
 const cx = classNames.bind(styles);
 
@@ -31,7 +34,16 @@ function Header() {
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
 
-    const user = true;
+    const { state, logout } = useContext(AuthContext);
+    const { isLogin, username } = state;
+
+    const navigate = useNavigate();
+    const handleNavigateToOrder = useCallback(
+        (e) => {
+            navigate('/order');
+        },
+        [navigate],
+    );
 
     return (
         <header className={cx('wrapper')}>
@@ -95,7 +107,7 @@ function Header() {
                         placement="bottom-end"
                         // visible
                         render={(attrs) =>
-                            user ? (
+                            isLogin ? (
                                 <div className={cx('notification-display-user')} tabIndex="-1" {...attrs}>
                                     <header className={cx('notification-display-user-header')}>
                                         <div className={cx('user-header-right')}>
@@ -138,16 +150,17 @@ function Header() {
                         // visible
                         render={(attrs) => <div></div>}
                     >
-                        {!user ? (
+                        {!isLogin ? (
                             <HeadlessTippy
                                 interactive={true}
                                 placement="bottom-end"
                                 // visible
-                                render={(attrs) => 
+                                render={(attrs) => (
                                     <div className={cx('cart-guest')}>
-                                        <FontAwesomeIcon className={cx('cart-guest-icon')} icon={faCartShopping}/>
+                                        <FontAwesomeIcon className={cx('cart-guest-icon')} icon={faCartShopping} />
                                         <span>Chưa có sản phẩm</span>
-                                    </div>}
+                                    </div>
+                                )}
                             >
                                 <div className={cx('cart', 'common')}>
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
@@ -169,87 +182,25 @@ function Header() {
                         placement="bottom-end"
                         // visible
                         render={(attrs) =>
-                            user ? (
-                                <div className={cx('account-logined')} tabIndex="-1" {...attrs}>
-                                    <div className={cx('account-logined-wrapper')}>
-                                        <Link to="/profile" style={{ textDecoration: 'none' }}>
-                                            <header className={cx('account-logined-header')}>
-                                                <div className={cx('header-left')}>
-                                                    <FontAwesomeIcon
-                                                        className={cx('header-left-icon')}
-                                                        icon={faCrown}
-                                                    />
-                                                    <div className={cx('header-left-info')}>
-                                                        <h4>User name</h4>
-                                                        <h5>Thành viên của h3.com</h5>
-                                                    </div>
-                                                </div>
-                                                <FontAwesomeIcon
-                                                    className={cx('header-right')}
-                                                    icon={faCircleChevronRight}
-                                                />
-                                            </header>
-                                        </Link>
-                                        <div className={cx('account-logined-item-wrapper')}>
-                                            <div className={cx('account-logined-item')}>
-                                                <FontAwesomeIcon
-                                                    className={cx('account-logined-item-icon')}
-                                                    icon={faClipboardList}
-                                                />
-                                                <span>Đơn hàng của tôi</span>
-                                            </div>
-                                        </div>
-                                        <div className={cx('account-logined-item-wrapper', 'no-border')}>
-                                            <div className={cx('account-logined-item')}>
-                                                <FontAwesomeIcon
-                                                    className={cx('account-logined-item-icon')}
-                                                    icon={faSignOut}
-                                                />
-                                                <span>Thoát tài khoản</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            isLogin ? (
+                                <HeaderProfile
+                                    attrs={attrs}
+                                    username={username}
+                                    onLogout={(e) => {
+                                        e.preventDefault();
+                                        console.log('logout');
+                                        logout();
+                                        navigate('/');
+                                    }}
+                                    onNavigateToOrder={handleNavigateToOrder}
+                                />
                             ) : (
-                                <div className={cx('account-btn', disable ? 'disable' : '')} tabIndex="-1" {...attrs}>
-                                    <Link
-                                        to={{
-                                            pathname: '/login',
-                                        }}
-                                        state={{ login: true }}
-                                        style={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        <button className={cx('btn', 'btn-login')} onClick={addDisable}>
-                                            Login
-                                        </button>
-                                    </Link>
-                                    <Link
-                                        to={{
-                                            pathname: '/login',
-                                        }}
-                                        state={{ login: false }}
-                                        style={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        <button className={cx('btn', 'btn-register')} onClick={addDisable}>
-                                            Regiter
-                                        </button>
-                                    </Link>
-                                </div>
+                                <HeaderRegister attrs={attrs} />
                             )
                         }
                     >
                         <div className={cx('account', 'common', 'no-margin-right')}>
-                            {user ? (
+                            {isLogin ? (
                                 <Fragment>
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faUserGraduate} />
                                     <span>User</span>
