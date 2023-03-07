@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { useLogin, useRegister } from '../../../api/useAuth';
 import { redirect, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
-import ReactLoading from "react-loading";
+import ReactLoading from 'react-loading';
 
 const cx = classNames.bind(styles);
 
@@ -65,48 +65,53 @@ function LoginItem(data) {
     };
 
     const handleValidationPassConfirm = () => {
-        if(!(passwordConfirm === password)){
+        if (!(passwordConfirm === password)) {
             setConfirmPasswordErr('Confirm password is not matched');
-        }else{
+        } else {
             setConfirmPasswordErr('');
         }
-    }
+    };
 
     const navigate = useNavigate();
     const { state } = useContext(AuthContext);
     const { mutate: login, data: loginData } = useLogin({
         onSuccess: () => {
-            if (state['isLogin']) {
-                console.log(3);
-                navigate('/');
-                console.log(2);
-                setLoading(false);
-            }
+            // if (state['isLogin']) {
+            console.log(3);
+            navigate('/');
+            console.log(2);
+            setLoading(false);
+            // }
         },
     });
-    const {mutate: register} = useRegister({
+    const { mutate: register } = useRegister({
         onSuccess: () => {
-            if (state['isLogin']) {
-                navigate('/');
-                setLoading(false);
-            }
+            // if (state['isLogin']) {
+            navigate('/');
+            setLoading(false);
+            // }
         },
     });
-    
 
     const handleSubmit = () => {
         if (active === true && forget === false) {
             // setLoading(true);
             login({ email, password });
-        }else if(active === false && forget === false){
+        } else if (active === false && forget === false) {
             setLoading(true);
-            register({email, password});
+            register({ email, password });
         }
     };
 
     return (
         <div className={cx('form')}>
-            {loading ? <div className={cx('loading')}><ReactLoading type={'spinningBubbles'} color={'#0288d1'} /></div> : ''}
+            {loading ? (
+                <div className={cx('loading')}>
+                    <ReactLoading type={'spinningBubbles'} color={'#0288d1'} />
+                </div>
+            ) : (
+                ''
+            )}
             {forget ? (
                 <header className={cx('form-header-forget')}>Khôi phục mật khẩu</header>
             ) : (
@@ -143,7 +148,7 @@ function LoginItem(data) {
                             }}
                             onKeyUp={handleValidationPass}
                         />
-                        <p style={{color : 'red'}}>{forget ? '' : passwordErr}</p>
+                        <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p>
                     </div>
                     {active ? (
                         ''
@@ -156,13 +161,13 @@ function LoginItem(data) {
                                 onChange={(e) => setPasswordConfirm(e.target.value)}
                                 onKeyUp={handleValidationPassConfirm}
                             />
-                            <p style={{color : 'red'}}>{forget ? '' : confirmPasswordErr}</p>
+                            <p style={{ color: 'red' }}>{forget ? '' : confirmPasswordErr}</p>
                         </div>
                     )}
                     {forget ? (
                         <div className={cx('newpass-check')}>
                             <h4>Xác nhận mật khẩu :</h4>
-                            <input type="password" className={cx('password')} onKeyUp={handleValidationPassConfirm}/>
+                            <input type="password" className={cx('password')} onKeyUp={handleValidationPassConfirm} />
                         </div>
                     ) : (
                         ''
