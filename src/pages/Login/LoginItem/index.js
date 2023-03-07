@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
-import * as userService from '../../../apiServices/userService';
-import { Link } from 'react-router-dom';
+import { useLogin } from '../../../api/useAuth';
+import { redirect, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContext';
+
 const cx = classNames.bind(styles);
 
 const userInfo = {
@@ -17,64 +19,31 @@ function LoginItem(data) {
     const [active, setActive] = useState(data.data);
     const addActive = () => setActive(true);
     const remoteActive = () => setActive(false);
+    console.log(data.data);
 
     const [forget, setForget] = useState(false);
     const addForget = () => setForget(true);
     const remoteFroget = () => setForget(false);
 
-    const [account, setAccount] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [passwordErr, setPasswordErr] = useState('');
-    const [confirmPasswordErr, setConfirmPasswordErr] = useState('');
-    const handleValidation = () => {
-        //for password
-        const uppercaseRegExp = /(?=.*?[A-Z])/;
-        const lowercaseRegExp = /(?=.*?[a-z])/;
-        const digitsRegExp = /(?=.*?[0-9])/;
-        const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
-        const minLengthRegExp = /.{8,}/;
-        const passwordLength = password.length;
-        const uppercasePassword = uppercaseRegExp.test(password);
-        const lowercasePassword = lowercaseRegExp.test(password);
-        const digitsPassword = digitsRegExp.test(password);
-        const specialCharPassword = specialCharRegExp.test(password);
-        const minLengthPassword = minLengthRegExp.test(password);
-        let errMsg = '';
-        if (passwordLength === 0) {
-            errMsg = 'Password is empty';
-        } else if (!uppercasePassword) {
-            errMsg = 'At least one Uppercase';
-        } else if (!lowercasePassword) {
-            errMsg = 'At least one Lowercase';
-        } else if (!digitsPassword) {
-            errMsg = 'At least one digit';
-        } else if (!specialCharPassword) {
-            errMsg = 'At least one Special Characters';
-        } else if (!minLengthPassword) {
-            errMsg = 'At least minumum 8 characters';
-        } else {
-            errMsg = '';
-        }
-        setPasswordErr(errMsg);
-    };
-    const register = async () => {
-        if (account === '') {
-            console.log('ban chua nhap email');
-        } else if (password === '') {
-            console.log('ban chua nhap pass');
-        } else if (passwordConfirm === '') {
-            console.log('xác nhận mật khẩu');
-        } else if (password === passwordConfirm) {
-            userInfo.email = account;
-            userInfo.password = password;
-            const res = await userService.postInfo(userInfo);
-            console.log(res);
-        } else {
-            console.log('nhap sai pw');
-            setConfirmPasswordErr('Confirm password is not matched');
+
+    const { state } = useContext(AuthContext);
+    const { mutate: login, data: loginData } = useLogin({
+        onSuccess: () => {
+            if (state['isLogin']) {
+                navigate('/');
+            }
+        },
+    });
+    const navigate = useNavigate();
+
+    const handleSubmit = () => {
+        if (active === true && forget === false) {
+            login({ email, password });
         }
     };
+
     return (
         <div className={cx('form')}>
             {forget ? (
@@ -93,17 +62,25 @@ function LoginItem(data) {
                 <form className={cx('register-form')}>
                     <div className={cx('account')}>
                         <h4>Tài khoản :</h4>
-                        <input type="text" className={cx('phone-email')} onChange={(e) => setAccount(e.target.value)} />
+                        <input
+                            type="text"
+                            className={cx('phone-email')}
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                        />
                     </div>
                     <div className={cx('pass')}>
                         <h4>{forget ? 'Mật khẩu mới :' : 'Mật khẩu:'}</h4>
                         <input
                             type="password"
                             className={cx('password')}
-                            onChange={(e) => setPassword(e.target.value)}
-                            onKeyUp={handleValidation}
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
                         />
-                        <p style={{color : 'red'}}>{passwordErr}</p>
                     </div>
                     {active ? (
                         ''
@@ -123,24 +100,19 @@ function LoginItem(data) {
                             <h4>Xác nhận mật khẩu :</h4>
                             <input type="password" className={cx('password')} />
                         </div>
+                    ): ''}
+                    {forget ? (
+                        <div className={cx('newpass-check')}>
+                            <h4>Xác nhận mật khẩu :</h4>
+                            <input type="password" className={cx('password')} />
+                        </div>
                     ) : (
                         ''
                     )}
                 </form>
                 {active === true && forget === false ? <button onClick={addForget}>Quên mật khẩu?</button> : ''}
                 <div className={cx('register-btn')}>
-                    {forget ? (
-                        <button>Xác nhận</button>
-                    ) : active ? (
-                        <button>Đăng nhập</button>
-                    ) : (
-                        <Link 
-                            to="/"
-                            state={{ user: true }}
-                        >
-                            <button onClick={register}>Đăng ký</button>
-                        </Link>
-                    )}
+                    <button onClick={handleSubmit}>{forget ? 'Xác nhận' : active ? 'Đăng nhập' : 'Đăng ký'}</button>
                     {forget ? <button onClick={remoteFroget}>Quay lại</button> : ''}
                 </div>
             </div>
