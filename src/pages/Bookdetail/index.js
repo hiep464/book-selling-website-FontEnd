@@ -2,13 +2,19 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './style.module.scss';
-import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
-import { useGetBookDetail, useGetBookFeedback } from '../../api/useBook';
+import { useGetBookDetail, useGetBookFeedback, useAddBookToCart } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
+import Rating from './Rating';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import StarRatings from 'react-star-ratings';
 
 const cx = classNames.bind(style);
 
@@ -34,28 +40,34 @@ function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-
+    console.log(book);
     const bookFeedbackResponse = useGetBookFeedback(bookId);
     const feedbackList = bookFeedbackResponse?.data;
 
     return (
         <div className={cx('page-wrapper')}>
+            {/* <div className={cx('add-cart-noti-wrap')}>
+                <div className={cx('add-cart-noti')}>
+                    <FontAwesomeIcon className={cx('add-cart-noti-icon')} icon={faCircleCheck}></FontAwesomeIcon>
+                    Thêm vào giỏ hàng thành công
+                </div>
+            </div> */}
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
                         <a href="#">Home</a>
                     </li>
-                    <li class="breadcrumb-item">
+                    <li className="breadcrumb-item">
                         <a href="#">Book Detail</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item active" aria-current="page">
                         Tên sách
                     </li>
                 </ol>
             </nav>
             {/* content */}
             <BookInfo {...book} />
-            <BookFeedback feedbackList={feedbackList} />
+            <BookFeedback feedbackList={feedbackList} bookId={bookId} />
             {/* content */}
         </div>
     );
@@ -78,13 +90,14 @@ function BookInfo(props) {
         price,
         publishDate,
         publisher,
+        rating,
         supplier,
         updatedAt,
         weight,
         width,
         numOfPages,
     } = props;
-
+    console.log(rating);
     const img = coverUrl;
     // require('../../assets/images/book_detail/image_208345.jpg')
 
@@ -95,16 +108,44 @@ function BookInfo(props) {
         decrementCounter = () => setCounter(1);
     }
 
+    const [addcart, setAddcart] = useState(false);
+
+    const { state } = useContext(AuthContext);
+    const { mutate: addBookToCart } = useAddBookToCart(id, state['userId'], counter);
+    const navigate = useNavigate();
+    const handleAddCart = () => {
+        if(state['isLogin']){
+            setAddcart(true);
+            addBookToCart({ quantity: counter });
+            setTimeout(()=>setAddcart(false), 1000);
+        }else{
+            navigate('/login');
+        }
+    };
+
     return (
         <>
             <div className={cx('bookdetail-wrapper')}>
+                {
+                    addcart ? (
+                        <div className={cx('add-cart-noti-wrap')}>
+                            <div className={cx('add-cart-noti')}>
+                                <FontAwesomeIcon
+                                    className={cx('add-cart-noti-icon')}
+                                    icon={faCircleCheck}
+                                ></FontAwesomeIcon>
+                                Thêm vào giỏ hàng thành công
+                            </div>
+                        </div>
+                    ) : ''
+                }
                 <div className={cx('row')}>
                     <div className={cx('bookdetail-thumbnail', 'col-md-5')}>
                         <div className={cx('thumbnail-img')}>
                             <img src={img} alt=""></img>
                             <div className={cx('thumbnail-btn', 'row')}>
                                 <div className={cx('more-detail', 'col-md-6')}>
-                                    <button type="button" className={cx('more-detail-btn')}>
+                                    <button type="button" className={cx('more-detail-btn')} onClick={handleAddCart}>
                                         <FontAwesomeIcon icon={faCartShopping} />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>
@@ -140,12 +181,12 @@ function BookInfo(props) {
                         </div>
 
                         <div className={cx('star')}>
+                            {/* <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                            <span>(sold)</span>
+                            <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
+                            <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>
@@ -229,9 +270,10 @@ function BookFeedback(props) {
                         </div>
                         <div className={cx('feedback-point-star')}>
                             <div className={cx('star')}>
-                                {new Array(Math.floor(rating)).fill(1).map((item, i) => (
-                                    <FontAwesomeIcon className={cx('color')} icon={faStar} />
-                                ))}
+                                {/* {new Array(Math.floor(rating)).fill(1).map((item, i) => (
+                                    <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
+                                ))} */}
+                                <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="18px" starSpacing="1px" />
                             </div>
                         </div>
                         <div className={cx('feedback-point-quantity')} style={{ fontSize: '13px', fontWeight: '500' }}>
@@ -244,7 +286,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>5 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="30"
@@ -258,7 +300,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>4 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -272,7 +314,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>3 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -286,7 +328,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>2 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -300,7 +342,7 @@ function BookFeedback(props) {
                         <span style={{ fontSize: '1.5rem', margin: '0 0.7rem' }}>1 sao </span>
                         <div className={cx('progress', 'feedback-star-point')}>
                             <div
-                                class="progress-bar bg-warning"
+                                className="progress-bar bg-warning"
                                 role="progressbar"
                                 style={{ width: '100%' }}
                                 aria-valuenow="75"
@@ -316,6 +358,28 @@ function BookFeedback(props) {
                         Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="#">đăng nhập</a> hoặc
                         <a href="#"> đăng ký</a>.
                     </p>
+                    {/* <form
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start',
+                            paddingLeft: '10rem',
+                        }}
+                    >
+                        <label>
+                            <span>UserId (test):</span>
+                        </label>
+                        <br />
+                        <input id="userId" name="userId" />
+                        <br />
+                        <Rating />
+                        <label>
+                            <span>Message:</span>
+                        </label>
+                        <br />
+                        <input id="comment" name="comment" />
+                    </form> */}
                 </div>
             </div>
             <hr></hr>
@@ -326,7 +390,7 @@ function BookFeedback(props) {
                     </p>
                 </div>
                 {feedbackList.map((item, i) => (
-                    <Comment {...item} />
+                    <Comment {...item} key={i} />
                 ))}
             </div>
         </div>

@@ -3,8 +3,9 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Item from './Product';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetBookCategories, useGetBooks } from '../../api/useBook';
+import { useParams, useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -26,12 +27,23 @@ const sortBy = [
 const pageSize = 20;
 
 function Categories() {
+    const { state } = useLocation();
+    console.log('state');
+    console.log(state);
+    const initCategory = state?.initCategory;
+
     const [category, setCategory] = useState(-1);
     const [priceRangeId, setPriceRangeId] = useState(-1);
     const [sortById, setSortById] = useState(0);
     const [page, setPage] = useState(1);
 
     const categories = useGetBookCategories();
+
+    useEffect(() => {
+        if (initCategory && categories) {
+            setCategory(categories?.findIndex((category) => category === initCategory));
+        }
+    }, [categories, initCategory]);
 
     const bookListResponse = useGetBooks(
         { page, limit: pageSize },
@@ -43,6 +55,7 @@ function Categories() {
             category: category === -1 ? undefined : categories[category],
         },
     );
+    console.log(bookListResponse);
     const books = bookListResponse?.data || [];
     const numOfPages = Math.ceil(bookListResponse?.total / pageSize) || 1;
 

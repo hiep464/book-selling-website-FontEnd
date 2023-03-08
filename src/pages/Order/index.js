@@ -1,7 +1,7 @@
-import style from './style.module.scss';
 import classNames from 'classnames/bind';
+import styles from './style.module.scss';
 
-const cx = classNames.bind(style);
+const cx = classNames.bind(styles);
 
 function Order() {
     return (
