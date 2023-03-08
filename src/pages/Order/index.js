@@ -3,7 +3,9 @@ import styles from './style.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Order() {
+function Order(props) {
+    const { id, createdAt, user, sippingFees } = props;
+
     return (
         <div>
             <div className={cx('page-header')}>
