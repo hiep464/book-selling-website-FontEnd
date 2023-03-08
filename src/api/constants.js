@@ -1,4 +1,5 @@
-export const apiBaseUrl = 'https://web-pj-be.fly.dev/api/v1';
+// export const apiBaseUrl = 'https://web-pj-be.fly.dev/api/v1';
+export const apiBaseUrl = 'http://localhost:3001/api/v1';
 
 export const getApiResponseData = (result) => {
     const { isError, isIdle, error } = result;
