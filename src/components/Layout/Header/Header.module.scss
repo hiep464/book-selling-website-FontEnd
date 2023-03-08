@@ -19,13 +19,13 @@
     font-size: 1.6rem;
     text-decoration: none;
 
-    span{
+    span {
         font-size: 20px;
         font-weight: 600px;
     }
 }
 
-.logo-img{
+.logo-img {
     width: 40px;
     height: 40px;
 }
@@ -78,29 +78,29 @@
     background-color: white;
 }
 
-.search-result-icon{
+.search-result-icon {
     margin: 0 5px;
 }
 
-.search-result1-menu{
+.search-result1-menu {
     display: flex;
     flex-wrap: wrap;
 }
 
-.search-result1-item{
+.search-result1-item {
     width: calc((100% - 30px) / 3);
     background-color: red;
     height: 60px;
     margin: 5px 5px;
 }
 
-.search-result2-menu{
+.search-result2-menu {
     width: 100%;
     display: flex;
     padding-bottom: 10px;
 }
 
-.search-result2-item{
+.search-result2-item {
     width: calc((100% - 10px) / 4);
     height: 80px;
     background-color: red;
@@ -113,7 +113,7 @@
 }
 
 ///cart guest
-.cart-guest{
+.cart-guest {
     width: 150px;
     background-color: white;
     display: flex;
@@ -123,13 +123,13 @@
     border-radius: 4px;
     box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
 
-    span{
+    span {
         margin-bottom: 20px;
         font-size: 12px;
     }
 }
 
-.cart-guest-icon{
+.cart-guest-icon {
     width: 48px;
     height: 48px;
     margin: 20px 0 5px 0;
@@ -155,8 +155,7 @@
     }
 }
 
-
-.icon-size{
+.icon-size {
     height: 20px;
     width: 20px;
 }
@@ -220,7 +219,7 @@
     font-size: 1.2rem;
     font-weight: 400;
 
-    span{
+    span {
         margin-left: 3px;
     }
 }
@@ -258,25 +257,25 @@
     padding-bottom: 5px;
 }
 
-.form-wrap{
+.form-wrap {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 0, 0, 0.2);;
+    background-color: rgba(255, 0, 0, 0.2);
     display: none;
     align-items: center;
     justify-content: center;
 }
 
-.disable{
+.disable {
     display: none;
 }
 
 // USER LOGIN
 //account
-.account-logined{
+.account-logined {
     background-color: white;
     display: flex;
     align-items: center;
@@ -286,11 +285,11 @@
     box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
 }
 
-.account-logined-wrapper{
+.account-logined-wrapper {
     width: 100%;
 }
 
-.account-logined-header{
+.account-logined-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,48 +299,47 @@
     border-top-right-radius: 6px;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
         background-color: #ccc;
     }
 }
 
-.header-left-icon{
+.header-left-icon {
     width: 40px;
     height: 40px;
     color: burlywood;
     margin: 0 10px;
 }
 
-.header-left{
+.header-left {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.header-left-info{
+.header-left-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 50px;
 
-    h5{
+    h5 {
         font-weight: 400;
     }
 }
 
-.header-right{
+.header-right {
     margin-right: 10px;
     height: 20px;
     width: 20px;
 }
 
-.account-logined-item-wrapper{
+.account-logined-item-wrapper {
     border-bottom: 1px solid #ccc;
     cursor: pointer;
-
 }
 
-.account-logined-item{
+.account-logined-item {
     display: flex;
     align-items: center;
     padding: 10px 0 8px 14px;
@@ -349,10 +347,10 @@
     background-color: white;
     width: 100%;
 
-    &:hover{
+    &:hover {
         background-color: #ccc;
     }
-    .account-logined-item-icon{
+    .account-logined-item-icon {
         margin: 0 8px;
         width: 18px;
         height: 18px;
@@ -360,52 +358,57 @@
 }
 
 //ghi de
-.no-border{
+.no-border {
     border-bottom: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
     padding-bottom: 1px;
 }
 
-.no-margin-right{
+.no-margin-right {
     margin-right: 0;
 }
 
 //thong bao
-.notification-display-user{
+.notification-display-user {
     width: 260px;
     background-color: white;
     box-shadow: 1px 2px 2px rgba(122, 126, 127, 0.5);
     border-radius: 4px;
 }
 
-.notification-display-user-header{
+.notification-display-user-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ccc;
 
-
-    h5{
+    h5 {
         font-size: 1.5rem;
     }
-    span{
+    span {
         font-size: 1.2rem;
         margin-right: 8px;
         cursor: pointer;
     }
 }
 
-.user-header-right{
+.user-header-right {
     margin-left: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .user-header-right-icon{
+    .user-header-right-icon {
         margin-right: 4px;
         width: 14px;
         height: 14px;
+    }
+}
+
+.hover-gray {
+    &:hover {
+        background-color: #ccc;
     }
 }

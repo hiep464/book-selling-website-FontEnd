@@ -19,6 +19,8 @@ import LoginItem from '../../../pages/Login/LoginItem';
 import HeaderProfile from './HeaderProfile';
 import HeaderRegister from './HeaderRegister';
 import { AuthContext } from '../../../context/AuthContext';
+import HeaderSearchResult from './HeaderSearchResult';
+import HeaderSearch from './HeaderSerach';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -76,18 +78,12 @@ function Header() {
                     </Link>
                 </div>
 
-                <div className={cx('search')}>
-                    <input
-                        className={cx('search-input')}
-                        placeholder="Tim kiếm sản phẩm mong muốn..."
-                        onClick={show}
-                    ></input>
-                    <button>
-                        <FontAwesomeIcon icon={faSearch} />
-                    </button>
-                </div>
+                {/* Search */}
+                <HeaderSearch />
+                {/* Search */}
 
                 <div className={cx('action')}>
+                    {/* Notification */}
                     <HeadlessTippy
                         interactive={true}
                         placement="bottom-end"
@@ -130,6 +126,9 @@ function Header() {
                             <span>Thông báo</span>
                         </div>
                     </HeadlessTippy>
+                    {/* Notification */}
+
+                    {/* Cart */}
                     <HeadlessTippy
                         interactive={true}
                         placement="bottom-end"
@@ -162,7 +161,9 @@ function Header() {
                             </Link>
                         )}
                     </HeadlessTippy>
+                    {/* Cart */}
 
+                    {/* Acc */}
                     <HeadlessTippy
                         interactive
                         placement="bottom-end"
@@ -221,6 +222,7 @@ function Header() {
                             )}
                         </div>
                     </HeadlessTippy>
+                    {/* Acc */}
                 </div>
             </div>
             {/* hiển thị khi ấn vào nút login or register */}
