@@ -51,8 +51,11 @@ function Cart() {
                         <span>Tống số tiền (gồm VAT)</span>
                         <span>0đ</span>
                     </div>
-                    <div className={cx('select-address')}>
+
+                    <div className={cx('address-confirm')}>
                         <p>Xác nhận địa chỉ</p>
+                    </div>
+                    <div className={cx('select-address')}>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Chọn thành phố</option>
                             <option value="1">One</option>
