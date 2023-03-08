@@ -68,8 +68,8 @@ function LoginItem(data) {
     };
 
     const navigate = useNavigate();
-    const { state } = useContext(AuthContext);
-    const { mutate: login, data: loginData } = useLogin({
+    // const { state } = useContext(AuthContext);
+    const handleMutationEvent = {
         onSuccess: () => {
             // if (state['isLogin']) {
             navigate('/');
@@ -79,20 +79,10 @@ function LoginItem(data) {
         onError: () => {
             setLoading(false);
             setErr(true);
-        }
-    });
-    const { mutate: register } = useRegister({
-        onSuccess: () => {
-            // if (state['isLogin']) {
-            navigate('/');
-            setLoading(false);
-            // }
         },
-        onError: () => {
-            setLoading(false);
-            setErr(true);
-        }
-    });
+    };
+    const { mutate: login, data: loginData } = useLogin(handleMutationEvent);
+    const { mutate: register } = useRegister(handleMutationEvent);
 
     const handleSubmit = () => {
         if (active === true && forget === false) {
@@ -117,14 +107,17 @@ function LoginItem(data) {
                 <div className={cx('noti-err-wrapper')}>
                     <div className={cx('noti-err')}>
                         <div className={cx('noti-err-header')}>
-                            <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')}/>
+                            <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')} />
                             <span>Error</span>
                         </div>
-                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>OK</button>
+                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>
+                            OK
+                        </button>
                     </div>
                 </div>
-            ) : ''
-            }
+            ) : (
+                ''
+            )}
             {forget ? (
                 <header className={cx('form-header-forget')}>Khôi phục mật khẩu</header>
             ) : (
