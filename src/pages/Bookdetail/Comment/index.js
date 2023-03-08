@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './comment.module.scss';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
+import StarRatings from 'react-star-ratings';
 const cx = classNames.bind(style);
 
 function Comment(props) {
@@ -26,9 +26,10 @@ function Comment(props) {
                 <div className={cx('col-10')}>
                     <div className={cx('feedback-point-star')}>
                         <div className={cx('star')}>
-                            {new Array(Math.floor(rating)).fill(1).map((_, i) => (
+                            {/* {new Array(Math.floor(rating)).fill(1).map((_, i) => (
                                 <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
-                            ))}
+                            ))} */}
+                            <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="16px" starSpacing="1px" />
                         </div>
                     </div>
                     <div className={cx('comment-content')}>{comment}</div>

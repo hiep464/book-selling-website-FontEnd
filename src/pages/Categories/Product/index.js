@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 const cx = classNames.bind(styles);
 
 function Item(props) {
@@ -25,9 +26,10 @@ function Item(props) {
                     <span className={cx('volume')}>{numOfPages} pages</span>
                 </div>
                 <div className={cx('star')}>
-                    {new Array(Number.parseInt(rating)).fill(1).map((item, index) => {
-                        return <FontAwesomeIcon className={cx('color')} icon={faStar} key={index} />;
-                    })}
+                    {/* {new Array(Number.parseInt(rating)).fill(1).map((item, index) => {
+                        // return <FontAwesomeIcon className={cx('color')} icon={faStar} key={index} />;
+                    })} */}
+                    <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="14px" starSpacing="0px" />
                     {/* <span>(sold)</span> */}
                 </div>
             </div>

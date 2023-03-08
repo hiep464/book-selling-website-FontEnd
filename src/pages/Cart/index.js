@@ -1,13 +1,21 @@
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import CartItem from './CartItem';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import {useGetBookInCart} from '../../api/useBook';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
+
+    const { state } = useContext(AuthContext);
+    const cart = useGetBookInCart(state['userId']);
+    const cartList = cart?.data;
+    console.log(cart);
     return (
         <div className={cx('page-wrapper')}>
-            <header className={cx('page-title')}>Gio hang (x san pham)</header>
+            <header className={cx('page-title')}>Giỏ Hàng ({cartList?.length} sản phẩm)</header>
             <div className={cx('cart-wrapper')}>
                 <div className={cx('cart-left')}>
                     <div className={cx('cart-navbar')}>
@@ -25,9 +33,14 @@ function Cart() {
                         </div>
                     </div>
                     <div className={cx('cart-item')}>
-                        <CartItem />
-                        <CartItem />
-                        <CartItem />
+                        {cartList?.map((item) => (
+                            <CartItem
+                                key={item.bookId}
+                                quantity={item.quantity}
+                                bookId={item.bookId}
+                                userId={item.userId}
+                            />
+                        ))}
                     </div>
                 </div>
                 <div className={cx('cart-right')}>
@@ -47,4 +60,3 @@ function Cart() {
 }
 
 export default Cart;
- 
