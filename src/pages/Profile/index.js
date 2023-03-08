@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './profile.module.scss';
-import { useGetProfile } from '../../api/useAuth';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { useGetProfile, useUpdateProfile } from '../../api/useUser';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +23,7 @@ function Profile({ children }) {
 
     const [profile, setProfile] = useState({
         email: '',
-        gender: true,
+        gender: 'MALE',
         name: '',
         phone: '',
     });
@@ -31,9 +31,15 @@ function Profile({ children }) {
     const user = useGetProfile(userId);
     useEffect(() => {
         if (user) setProfile(user);
-    }, [profile, user]);
+    }, [user]);
+
+    const { mutate: updateProfile } = useUpdateProfile(userId, {});
 
     if (!isLogin) return <div>Not login</div>;
+
+    const handleNameChange = (e) => setProfile((state) => ({ ...state, name: e.target.value }));
+    const handlePhoneChange = (e) => setProfile((state) => ({ ...state, phone: e.target.value }));
+    const handleEmailChange = (e) => setProfile((state) => ({ ...state, email: e.target.value }));
 
     return (
         <div className={cx('wrapper')}>
@@ -46,15 +52,30 @@ function Profile({ children }) {
                     </div> */}
                     <div className={cx('item')}>
                         <div className={cx('item-name')}>Tên*</div>
-                        <input className={cx('item-input-text')} type="text" value={profile?.name}></input>
+                        <input
+                            className={cx('item-input-text')}
+                            type="text"
+                            value={profile?.name}
+                            onChange={handleNameChange}
+                        ></input>
                     </div>
                     <div className={cx('item')}>
                         <div className={cx('item-name')}>Số điện thoại</div>
-                        <input className={cx('item-input-text')} type="text" value={profile?.phone}></input>
+                        <input
+                            className={cx('item-input-text')}
+                            type="text"
+                            value={profile?.phone}
+                            onChange={handlePhoneChange}
+                        ></input>
                     </div>
                     <div className={cx('item')}>
                         <div className={cx('item-name')}>Email</div>
-                        <input className={cx('item-input-text')} type="text" value={profile?.email}></input>
+                        <input
+                            className={cx('item-input-text')}
+                            type="text"
+                            value={profile?.email}
+                            onChange={handleEmailChange}
+                        ></input>
                     </div>
                     <div className={cx('item')}>
                         <div className={cx('item-name')}>Giới tính</div>
@@ -63,7 +84,11 @@ function Profile({ children }) {
                             className={cx('item-input-radio')}
                             name="gioitinh"
                             type="radio"
-                            value={profile?.gender}
+                            // defaultChecked={profile?.gender}
+                            checked={profile?.gender === 'MALE'}
+                            onClick={(e) => {
+                                setProfile((p) => ({ ...p, gender: 'MALE' }));
+                            }}
                         />
                         <label htmlFor="profile-input">Nam</label>
                         <input
@@ -71,7 +96,11 @@ function Profile({ children }) {
                             className={cx('item-input-radio')}
                             name="gioitinh"
                             type="radio"
-                            value={!profile?.gender}
+                            // defaultChecked={!profile?.gender}
+                            checked={profile?.gender === 'FEMALE'}
+                            onClick={(e) => {
+                                setProfile((p) => ({ ...p, gender: 'FEMALE' }));
+                            }}
                         />
                         <label htmlFor="profile-input-nu">Nữ</label>
                     </div>
@@ -80,7 +109,15 @@ function Profile({ children }) {
                         <input className={cx('item-input-text')} type="text"></input>
                     </div> */}
                     <div className={cx('btn-wrapper')}>
-                        <input className={cx('input-submit')} type="submit" value="Lưu thay đổi" />
+                        <input
+                            className={cx('input-submit')}
+                            type="submit"
+                            value="Lưu thay đổi"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                updateProfile(profile);
+                            }}
+                        />
                     </div>
                 </form>
             </div>
