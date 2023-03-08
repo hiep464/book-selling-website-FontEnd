@@ -1,21 +1,15 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './style.module.scss';
 import classNames from 'classnames/bind';
 import { useLogin, useRegister } from '../../../api/useAuth';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-const userInfo = {
-    email: '',
-    name: '',
-    password: '',
-    role: 'USER',
-    gender: 'MALE',
-    phone: '',
-};
 function LoginItem(data) {
     const [active, setActive] = useState(data.data);
     const addActive = () => setActive(true);
@@ -26,6 +20,7 @@ function LoginItem(data) {
     const remoteFroget = () => setForget(false);
 
     const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -76,11 +71,14 @@ function LoginItem(data) {
     // const { state } = useContext(AuthContext);
     const handleMutationEvent = {
         onSuccess: () => {
+            // if (state['isLogin']) {
             navigate('/');
             setLoading(false);
+            // }
         },
         onError: () => {
             setLoading(false);
+            setErr(true);
         },
     };
     const { mutate: login, data: loginData } = useLogin(handleMutationEvent);
@@ -101,6 +99,21 @@ function LoginItem(data) {
             {loading ? (
                 <div className={cx('loading')}>
                     <ReactLoading type={'spinningBubbles'} color={'#0288d1'} />
+                </div>
+            ) : (
+                ''
+            )}
+            {err ? (
+                <div className={cx('noti-err-wrapper')}>
+                    <div className={cx('noti-err')}>
+                        <div className={cx('noti-err-header')}>
+                            <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')} />
+                            <span>Error</span>
+                        </div>
+                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>
+                            OK
+                        </button>
+                    </div>
                 </div>
             ) : (
                 ''
@@ -139,9 +152,9 @@ function LoginItem(data) {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
-                            onKeyUp={handleValidationPass}
+                            onKeyUp={!active ? handleValidationPass : () => {}}
                         />
-                        <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p>
+                        {!active ? <p style={{ color: 'red' }}>{forget ? '' : passwordErr}</p> : ''}
                     </div>
                     {active ? (
                         ''

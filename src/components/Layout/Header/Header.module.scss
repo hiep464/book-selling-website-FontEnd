@@ -18,6 +18,16 @@
     font-weight: 600;
     font-size: 1.6rem;
     text-decoration: none;
+
+    span{
+        font-size: 20px;
+        font-weight: 600px;
+    }
+}
+
+.logo-img{
+    width: 40px;
+    height: 40px;
 }
 
 .menu {
@@ -49,7 +59,7 @@
         border-radius: 10px;
         height: 30px;
         margin-right: 5px;
-        background-color: red;
+        background-color: #c92127;
         color: white;
         cursor: pointer;
     }
@@ -125,7 +135,7 @@
     margin: 20px 0 5px 0;
 }
 
-.common {
+.common-header {
     width: 60px;
     height: 60px;
     display: flex;
@@ -141,8 +151,10 @@
         margin-top: 4px;
         font-size: 1.22rem;
         font-weight: 500;
+        color: black;
     }
 }
+
 
 .icon-size{
     height: 20px;

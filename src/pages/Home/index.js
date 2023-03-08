@@ -6,6 +6,11 @@ import { useGetBookCategories } from '../../api/useBook';
 import ProductCategoryPreview from './ProductCategoryPreview';
 import StaticBanner from './StaticBanner';
 import CategoryItem from './CategoryItem';
+import Product from './Product';
+// import Slider from 'react-slick';
+import { useGetBooks } from '../../api/useBook';
+import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(style);
 
