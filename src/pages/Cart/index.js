@@ -3,12 +3,11 @@ import classNames from 'classnames/bind';
 import CartItem from './CartItem';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import {useGetBookInCart} from '../../api/useBook';
+import { useGetBookInCart } from '../../api/useBook';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
-
     const { state } = useContext(AuthContext);
     const cart = useGetBookInCart(state['userId']);
     const cartList = cart?.data;
@@ -51,6 +50,26 @@ function Cart() {
                     <div className={cx('cart-right-body', 'flex')}>
                         <span>Tống số tiền (gồm VAT)</span>
                         <span>0đ</span>
+                    </div>
+                    <div className={cx('select-address')}>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
                     </div>
                     <button className={cx('btn')}>THANH TOÁN</button>
                 </div>
