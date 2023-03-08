@@ -21,7 +21,7 @@ function Footer() {
         <footer>
             <div className={cx('footer-contain-block')}>
                 <div className={cx('announce-subcribe', 'row', 'container')}>
-                    <div className={cx('announce-subcribe-left', 'col-lg-4')}>
+                    {/* <div className={cx('announce-subcribe-left', 'col-lg-4')}>
                         <FontAwesomeIcon icon={faEnvelope} />
                         <div className={cx('announce-subcribe-title')}>đăng ký nhận bản tin</div>
                     </div>
@@ -31,7 +31,7 @@ function Footer() {
                             className={cx('announce-subcribe-input')}
                         ></input>
                         <button className={cx('announce-subcribe-btn')}>Đăng ký</button>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className={cx('footer-content', 'container')}>
@@ -48,7 +48,8 @@ function Footer() {
                             </div>
                             <div className={cx('certificate-img')}>
                                 <img
-                                    src={require('../../../assets/images/logo-bo-cong-thuong-da-thong-bao1.png')} alt=''
+                                    src={require('../../../assets/images/logo-bo-cong-thuong-da-thong-bao1.png')}
+                                    alt=""
                                 ></img>
                             </div>
                             <div className={cx('footer-social')}>

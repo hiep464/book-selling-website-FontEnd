@@ -70,20 +70,23 @@ function Categories() {
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-                Home
+                <span>Home</span>
                 <FontAwesomeIcon className={cx('header-icon')} icon={faChevronRight} />
-                All categories
+                <span> All categories</span>
             </header>
             <div className={cx('container')}>
                 <div className={cx('content-left-wraper')}>
                     <div className={cx('content-left')}>
                         <div className={cx('content-left-header')}>
-                            <span>Nhóm sản phẩm</span>
+                            <span>
+                                <strong>Nhóm sản phẩm</strong>
+                            </span>
                             <span>All categories</span>
                         </div>
                         <div className={cx('categories-list')}>
                             <ul className={cx('menu-list')}>
                                 <select
+                                    className={cx('form-select', 'font-size-fix')}
                                     id="data-type"
                                     value={category}
                                     onChange={(e) => {
@@ -103,17 +106,23 @@ function Categories() {
                             </ul>
                         </div>
                         <div className={cx('price')}>
-                            <span>Giá</span>
+                            <span>
+                                <strong>Giá</strong>
+                            </span>
                             <form>
                                 <table>
                                     <tbody>
                                         {priceRanges.map((priceRange, index) => (
                                             <tr key={index}>
                                                 <td>
-                                                    <input type="checkbox" onClick={handleChangePriceRange(index)} />
+                                                    <input
+                                                        type="checkbox"
+                                                        className={cx('form-check-input')}
+                                                        onClick={handleChangePriceRange(index)}
+                                                    />
                                                 </td>
                                                 <td onClick={() => {}}>
-                                                    {priceRange.min}đ - {priceRange.max || 'trở lên'}đ
+                                                    {priceRange.min}đ - {priceRange.max || 'trở lên'} đ
                                                 </td>
                                             </tr>
                                         ))}
@@ -121,43 +130,6 @@ function Categories() {
                                 </table>
                             </form>
                         </div>
-                        {/* <div className={cx('age')}>
-                            <span>Độ tuổi</span>
-                            <form>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                        <td> 3+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                        <td> 6+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                        <td> 8 - 12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                        <td> 12+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                        <td> 16+</td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div> */}
                         <div className={cx('content-left-footer')}></div>
                     </div>
                 </div>

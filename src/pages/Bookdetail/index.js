@@ -114,11 +114,11 @@ function BookInfo(props) {
     const { mutate: addBookToCart } = useAddBookToCart(id, state['userId']);
     const navigate = useNavigate();
     const handleAddCart = () => {
-        if(state['isLogin']){
+        if (state['isLogin']) {
             setAddcart(true);
             addBookToCart({ quantity: counter });
-            setTimeout(()=>setAddcart(false), 1000);
-        }else{
+            setTimeout(() => setAddcart(false), 1000);
+        } else {
             navigate('/login');
         }
     };
@@ -126,19 +126,19 @@ function BookInfo(props) {
     return (
         <>
             <div className={cx('bookdetail-wrapper')}>
-                {
-                    addcart ? (
-                        <div className={cx('add-cart-noti-wrap')}>
-                            <div className={cx('add-cart-noti')}>
-                                <FontAwesomeIcon
-                                    className={cx('add-cart-noti-icon')}
-                                    icon={faCircleCheck}
-                                ></FontAwesomeIcon>
-                                Thêm vào giỏ hàng thành công
-                            </div>
+                {addcart ? (
+                    <div className={cx('add-cart-noti-wrap')}>
+                        <div className={cx('add-cart-noti')}>
+                            <FontAwesomeIcon
+                                className={cx('add-cart-noti-icon')}
+                                icon={faCircleCheck}
+                            ></FontAwesomeIcon>
+                            Thêm vào giỏ hàng thành công
                         </div>
-                    ) : ''
-                }
+                    </div>
+                ) : (
+                    ''
+                )}
                 <div className={cx('row')}>
                     <div className={cx('bookdetail-thumbnail', 'col-md-5')}>
                         <div className={cx('thumbnail-img')}>
@@ -273,7 +273,12 @@ function BookFeedback(props) {
                                 {/* {new Array(Math.floor(rating)).fill(1).map((item, i) => (
                                     <FontAwesomeIcon key={i} className={cx('color')} icon={faStar} />
                                 ))} */}
-                                <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="18px" starSpacing="1px" />
+                                <StarRatings
+                                    rating={rating}
+                                    starRatedColor="#ffc107"
+                                    starDimension="18px"
+                                    starSpacing="1px"
+                                />
                             </div>
                         </div>
                         <div className={cx('feedback-point-quantity')} style={{ fontSize: '13px', fontWeight: '500' }}>
