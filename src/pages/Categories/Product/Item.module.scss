@@ -1,4 +1,4 @@
-.container{
+.container {
     width: 210px;
     background-color: white;
     margin: 10px;
@@ -6,35 +6,35 @@
     display: flex;
     flex-direction: column;
 
-    &:hover{
+    &:hover {
         box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%);
     }
 }
 
-.title{
+.title {
     margin: 0 10px;
     text-align: left;
 }
 
-.image{
+.image {
     width: 190px;
     height: 190px;
-    background-color: red;
+    // background-color: red;
     margin: auto;
 }
 
-.price-volume{
+.price-volume {
     margin: 0 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.star{
+.star {
     margin: 0 10px;
     float: left;
 }
 
-.color{
+.color {
     color: #e3e5e5;
 }

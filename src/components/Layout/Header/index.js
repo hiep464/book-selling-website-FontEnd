@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,13 +16,25 @@ import {
     faUser,
     faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 import LoginItem from '../../../pages/Login/LoginItem';
 
-const cx = classNames.bind(styles);
+import { AuthContext } from '../../../context/AuthContext';
+import { useLogout } from '../../../api/useAuth';
 
+const cx = classNames.bind(styles);
 function Header() {
+    let user = false;
+    const data = useLocation();
+    if (data.state) {
+        user = data.state.user;
+    }
+    const { state } = useContext(AuthContext);
+    if (state['isLogin']) user = true;
+    // console.log(data);
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -30,15 +42,25 @@ function Header() {
     const [disable, setDisable] = useState(false);
     const addDisable = () => setDisable(true);
     const remoteDisable = () => setDisable(false);
+    const navigate = useNavigate();
+    const { mutate: logout } = useLogout();
 
-    const user = true;
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to="/" style={{ textDecoration: 'none' }} onClick={remoteDisable}>
+                <Link to="/" style={{ color: '#c92127' }} onClick={remoteDisable}>
                     <div className={cx('logo')}>
-                        <span>H3.com</span>
+                        <img
+                            className={cx('logo-img')}
+                            src={require('../../../assets/images/bookIcon.png')}
+                            alt=""
+                        ></img>
+                        <span> H3 Book Store</span>
                     </div>
                 </Link>
                 <div className={cx('menu')}>
@@ -47,47 +69,16 @@ function Header() {
                     </Link>
                 </div>
 
-                <HeadlessTippy
-                    visible={visible}
-                    onClickOutside={hide}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <div className={cx('search-result1')}>
-                                <FontAwesomeIcon icon={faArrowTrendUp} className={cx('search-result-icon')} />
-                                <span>Từ khóa Hot</span>
-                                <div className={cx('search-result1-menu')}>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                    <div className={cx('search-result1-item')}></div>
-                                </div>
-                            </div>
-                            <div className={cx('search-result2')}>
-                                <FontAwesomeIcon icon={faList} className={cx('search-result-icon')} />
-                                <span>Danh mục nổi bật</span>
-                                <div className={cx('search-result2-menu')}>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                    <div className={cx('search-result2-item')}></div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input
-                            className={cx('search-input')}
-                            placeholder="Tim kiếm sản phẩm mong muốn..."
-                            onClick={show}
-                        ></input>
-                        <button>
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <div className={cx('search')}>
+                    <input
+                        className={cx('search-input')}
+                        placeholder="Tim kiếm sản phẩm mong muốn..."
+                        onClick={show}
+                    ></input>
+                    <button>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
+                </div>
 
                 <div className={cx('action')}>
                     <HeadlessTippy
@@ -127,7 +118,7 @@ function Header() {
                             )
                         }
                     >
-                        <div className={cx('notification', 'common')}>
+                        <div className={cx('notification', 'common-header')}>
                             <FontAwesomeIcon className={cx('icon-size')} icon={faBell} />
                             <span>Thông báo</span>
                         </div>
@@ -143,20 +134,21 @@ function Header() {
                                 interactive={true}
                                 placement="bottom-end"
                                 // visible
-                                render={(attrs) => 
+                                render={(attrs) => (
                                     <div className={cx('cart-guest')}>
-                                        <FontAwesomeIcon className={cx('cart-guest-icon')} icon={faCartShopping}/>
+                                        <FontAwesomeIcon className={cx('cart-guest-icon')} icon={faCartShopping} />
                                         <span>Chưa có sản phẩm</span>
-                                    </div>}
+                                    </div>
+                                )}
                             >
-                                <div className={cx('cart', 'common')}>
+                                <div className={cx('cart', 'common-header')}>
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
                                     <span>Giỏ hàng</span>
                                 </div>
                             </HeadlessTippy>
                         ) : (
                             <Link to="/cart" style={{ textDecoration: 'none' }}>
-                                <div className={cx('cart', 'common')}>
+                                <div className={cx('cart', 'common-header')}>
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faCartShopping} />
                                     <span>Giỏ hàng</span>
                                 </div>
@@ -200,13 +192,13 @@ function Header() {
                                             </div>
                                         </div>
                                         <div className={cx('account-logined-item-wrapper', 'no-border')}>
-                                            <div className={cx('account-logined-item')}>
+                                            <button className={cx('account-logined-item')} onClick={handleLogout}>
                                                 <FontAwesomeIcon
                                                     className={cx('account-logined-item-icon')}
                                                     icon={faSignOut}
                                                 />
                                                 <span>Thoát tài khoản</span>
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -248,12 +240,22 @@ function Header() {
                             )
                         }
                     >
-                        <div className={cx('account', 'common', 'no-margin-right')}>
+                        <div className={cx('account', 'common-header', 'no-margin-right')}>
                             {user ? (
-                                <Fragment>
+                                <Link
+                                    to="/profile"
+                                    style={{
+                                        textDecoration: 'none',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        flexDirection: 'column',
+                                        color: '#7a7e7f',
+                                    }}
+                                >
                                     <FontAwesomeIcon className={cx('icon-size')} icon={faUserGraduate} />
                                     <span>User</span>
-                                </Fragment>
+                                </Link>
                             ) : (
                                 <Link
                                     to="/login"

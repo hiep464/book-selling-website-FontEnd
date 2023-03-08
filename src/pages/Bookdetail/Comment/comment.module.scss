@@ -23,8 +23,13 @@
     margin: 5px 5px 5px 0;
 }
 
+.active{
+    color: #ffc107;
+}
+
 
 .comment-content {
+    width: calc(1263px * 83.333 / 100);
     text-align: left;
     font-size: 1.4rem;
     margin: 1rem 0;
