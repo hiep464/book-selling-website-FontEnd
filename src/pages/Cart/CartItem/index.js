@@ -4,12 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import * as cartService from '../../../apiServices/cartService';
+import {useGetBookDetail} from '../../../api/useBook';
+
 
 const cx = classNames.bind(styles);
 const data = {quantity : 0}
 
 function CartItem({quantity, userId, bookId}) {
     const [quantityBook, setQuantityBook] = useState(quantity);
+    const book = useGetBookDetail(bookId);
+    // console.log(book);
     const handlePlus = () => {
         setQuantityBook(quantityBook + 1);
     }
@@ -23,7 +27,7 @@ function CartItem({quantity, userId, bookId}) {
         data.quantity = quantityBook;
         const updateQuantity = async () => {
             const res = await cartService.updateCart(bookId, userId, data);
-            console.log(res);
+            // console.log(res);
         }
         updateQuantity();
     }, [quantityBook, bookId, userId])
@@ -42,14 +46,13 @@ function CartItem({quantity, userId, bookId}) {
             <div style={{ width: '450px', margin: '4px' }}>
                 <div className={cx('product-info')}>
                     <div className={cx('product-img')}>
-                        <img src={require('../../../assets/images/item.jpg')} alt='product'></img>
+                        <img src={book?.coverUrl} alt='product'></img>
                     </div>
                     <div className={cx('product-info-body')}>
                         <span className={cx('title')}>
-                            Những Người Hàng Xóm - Bìa Cứng - Tặng Kèm Bookmark + Postcard + Thẻ Treo Bằng Nhựa Dẻo Xinh Xắn (1
-                            Trong 5 Mẫu Ngẫu Nhiên)
+                            {book?.title}
                         </span>
-                        <span>150.000đ</span>
+                        <span>{book?.price}</span>
                     </div>
                 </div>
             </div>
@@ -61,7 +64,7 @@ function CartItem({quantity, userId, bookId}) {
                 </div>
             </div>
             <div style={{ width: '146px' }} className={cx('center')}>
-                <span>140.000d</span>
+                <span>{book?.price * quantityBook}</span>
             </div>
             <div className={cx('center', 'icon')}>
                 <FontAwesomeIcon icon={faTrashCan} onClick={removeItem}/>

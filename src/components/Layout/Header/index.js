@@ -228,7 +228,7 @@ function Header() {
                             )
                         }
                     >
-                        <div className={cx('account', 'common', 'no-margin-right')}>
+                        <div className={cx('account', 'common-header', 'no-margin-right')}>
                             {isLogin ? (
                                 <Link
                                     to="/profile"

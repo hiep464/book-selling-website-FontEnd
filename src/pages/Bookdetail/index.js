@@ -9,7 +9,7 @@ import ReactReadMoreReadLess from 'react-read-more-read-less';
 import Comment from './Comment';
 import { useGetBookDetail, useGetBookFeedback, useAddBookToCart } from '../../api/useBook';
 import { useParams } from 'react-router-dom';
-import Rating from './Rating';
+// import Rating from './Rating';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +40,7 @@ function Bookdetail() {
     const { id: bookId } = useParams();
 
     const book = useGetBookDetail(bookId);
-    console.log(book);
+    // console.log(book);
     const bookFeedbackResponse = useGetBookFeedback(bookId);
     const feedbackList = bookFeedbackResponse?.data;
 
@@ -97,7 +97,7 @@ function BookInfo(props) {
         width,
         numOfPages,
     } = props;
-    console.log(rating);
+    // console.log(rating);
     const img = coverUrl;
     // require('../../assets/images/book_detail/image_208345.jpg')
 
@@ -111,7 +111,7 @@ function BookInfo(props) {
     const [addcart, setAddcart] = useState(false);
 
     const { state } = useContext(AuthContext);
-    const { mutate: addBookToCart } = useAddBookToCart(id, state['userId'], counter);
+    const { mutate: addBookToCart } = useAddBookToCart(id, state['userId']);
     const navigate = useNavigate();
     const handleAddCart = () => {
         if(state['isLogin']){
@@ -186,7 +186,7 @@ function BookInfo(props) {
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
-                            <StarRatings rating={rating} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
+                            <StarRatings rating={rating || 0} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>
