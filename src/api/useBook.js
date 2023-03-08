@@ -29,7 +29,12 @@ export const useGetBookCategories = () => {
     return result?.data;
 };
 
-export const useAddBookToCart = (bookId, userId) =>{
-    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {},() => {});
+export const useAddBookToCart = (bookId, userId) => {
+    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {}, () => {});
     return result;
-}
+};
+
+export const useSearchBook = (title) => {
+    const result = useFetch(`${apiBaseUrl}/books/`, { title }, {});
+    return getApiResponseData(result);
+};

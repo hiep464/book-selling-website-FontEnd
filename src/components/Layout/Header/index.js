@@ -181,49 +181,6 @@ function Header() {
                                     onNavigateToOrder={handleNavigateToOrder}
                                 />
                             ) : (
-                                // =======
-                                //                             user ? (
-                                //                                 <div className={cx('account-logined')} tabIndex="-1" {...attrs}>
-                                //                                     <div className={cx('account-logined-wrapper')}>
-                                //                                         <Link to="/profile" style={{ textDecoration: 'none' }}>
-                                //                                             <header className={cx('account-logined-header')}>
-                                //                                                 <div className={cx('header-left')}>
-                                //                                                     <FontAwesomeIcon
-                                //                                                         className={cx('header-left-icon')}
-                                //                                                         icon={faCrown}
-                                //                                                     />
-                                //                                                     <div className={cx('header-left-info')}>
-                                //                                                         <h4>User name</h4>
-                                //                                                         <h5>Thành viên của h3.com</h5>
-                                //                                                     </div>
-                                //                                                 </div>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('header-right')}
-                                //                                                     icon={faCircleChevronRight}
-                                //                                                 />
-                                //                                             </header>
-                                //                                         </Link>
-                                //                                         <div className={cx('account-logined-item-wrapper')}>
-                                //                                             <div className={cx('account-logined-item')}>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('account-logined-item-icon')}
-                                //                                                     icon={faClipboardList}
-                                //                                                 />
-                                //                                                 <span>Đơn hàng của tôi</span>
-                                //                                             </div>
-                                //                                         </div>
-                                //                                         <div className={cx('account-logined-item-wrapper', 'no-border')}>
-                                //                                             <button className={cx('account-logined-item')} onClick={handleLogout}>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('account-logined-item-icon')}
-                                //                                                     icon={faSignOut}
-                                //                                                 />
-                                //                                                 <span>Thoát tài khoản</span>
-                                //                                             </button>
-                                //                                         </div>
-                                //                                     </div>
-                                //                                 </div>
-                                // >>>>>>> feature/register-cart-feedback
                                 <HeaderRegister attrs={attrs} />
                             )
                         }
