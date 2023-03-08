@@ -107,12 +107,7 @@ function LoginItem(data) {
                 <div className={cx('noti-err-wrapper')}>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Error</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>
-                            OK
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             ) : (

@@ -52,20 +52,21 @@ function Cart() {
                         <span>0đ</span>
                     </div>
                     <div className={cx('select-address')}>
+                        <p>Xác nhận địa chỉ</p>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                            <option selected>Chọn thành phố</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                            <option selected>Chọn quận huyện</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                            <option selected>Chọn phường xã</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
