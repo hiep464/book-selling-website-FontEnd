@@ -24,7 +24,7 @@ const sortBy = [
     // { name: 'Tên (A-Z)', value: 'name', order: 'asc' },
 ];
 
-const pageSize = 20;
+const pageSize = 12;
 
 function Categories() {
     const { state } = useLocation();
