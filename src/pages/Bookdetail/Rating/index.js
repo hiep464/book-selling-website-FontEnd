@@ -15,3 +15,7 @@ export default function Rating(props) {
         </div>
     );
 }
+
+Rating.defaultProps = {
+    rating: 0,
+};

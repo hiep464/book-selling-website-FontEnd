@@ -19,6 +19,8 @@ import LoginItem from '../../../pages/Login/LoginItem';
 import HeaderProfile from './HeaderProfile';
 import HeaderRegister from './HeaderRegister';
 import { AuthContext } from '../../../context/AuthContext';
+import HeaderSearchResult from './HeaderSearchResult';
+import HeaderSearch from './HeaderSerach';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -76,18 +78,12 @@ function Header() {
                     </Link>
                 </div>
 
-                <div className={cx('search')}>
-                    <input
-                        className={cx('search-input')}
-                        placeholder="Tim kiếm sản phẩm mong muốn..."
-                        onClick={show}
-                    ></input>
-                    <button>
-                        <FontAwesomeIcon icon={faSearch} />
-                    </button>
-                </div>
+                {/* Search */}
+                <HeaderSearch />
+                {/* Search */}
 
                 <div className={cx('action')}>
+                    {/* Notification */}
                     <HeadlessTippy
                         interactive={true}
                         placement="bottom-end"
@@ -130,6 +126,9 @@ function Header() {
                             <span>Thông báo</span>
                         </div>
                     </HeadlessTippy>
+                    {/* Notification */}
+
+                    {/* Cart */}
                     <HeadlessTippy
                         interactive={true}
                         placement="bottom-end"
@@ -162,7 +161,9 @@ function Header() {
                             </Link>
                         )}
                     </HeadlessTippy>
+                    {/* Cart */}
 
+                    {/* Acc */}
                     <HeadlessTippy
                         interactive
                         placement="bottom-end"
@@ -181,54 +182,11 @@ function Header() {
                                     onNavigateToOrder={handleNavigateToOrder}
                                 />
                             ) : (
-                                // =======
-                                //                             user ? (
-                                //                                 <div className={cx('account-logined')} tabIndex="-1" {...attrs}>
-                                //                                     <div className={cx('account-logined-wrapper')}>
-                                //                                         <Link to="/profile" style={{ textDecoration: 'none' }}>
-                                //                                             <header className={cx('account-logined-header')}>
-                                //                                                 <div className={cx('header-left')}>
-                                //                                                     <FontAwesomeIcon
-                                //                                                         className={cx('header-left-icon')}
-                                //                                                         icon={faCrown}
-                                //                                                     />
-                                //                                                     <div className={cx('header-left-info')}>
-                                //                                                         <h4>User name</h4>
-                                //                                                         <h5>Thành viên của h3.com</h5>
-                                //                                                     </div>
-                                //                                                 </div>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('header-right')}
-                                //                                                     icon={faCircleChevronRight}
-                                //                                                 />
-                                //                                             </header>
-                                //                                         </Link>
-                                //                                         <div className={cx('account-logined-item-wrapper')}>
-                                //                                             <div className={cx('account-logined-item')}>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('account-logined-item-icon')}
-                                //                                                     icon={faClipboardList}
-                                //                                                 />
-                                //                                                 <span>Đơn hàng của tôi</span>
-                                //                                             </div>
-                                //                                         </div>
-                                //                                         <div className={cx('account-logined-item-wrapper', 'no-border')}>
-                                //                                             <button className={cx('account-logined-item')} onClick={handleLogout}>
-                                //                                                 <FontAwesomeIcon
-                                //                                                     className={cx('account-logined-item-icon')}
-                                //                                                     icon={faSignOut}
-                                //                                                 />
-                                //                                                 <span>Thoát tài khoản</span>
-                                //                                             </button>
-                                //                                         </div>
-                                //                                     </div>
-                                //                                 </div>
-                                // >>>>>>> feature/register-cart-feedback
                                 <HeaderRegister attrs={attrs} />
                             )
                         }
                     >
-                        <div className={cx('account', 'common', 'no-margin-right')}>
+                        <div className={cx('account', 'common-header', 'no-margin-right')}>
                             {isLogin ? (
                                 <Link
                                     to="/profile"
@@ -264,6 +222,7 @@ function Header() {
                             )}
                         </div>
                     </HeadlessTippy>
+                    {/* Acc */}
                 </div>
             </div>
             {/* hiển thị khi ấn vào nút login or register */}

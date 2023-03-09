@@ -104,15 +104,23 @@ function LoginItem(data) {
                 ''
             )}
             {err ? (
-                <div className={cx('noti-err-wrapper')}>
-                    <div className={cx('noti-err')}>
-                        <div className={cx('noti-err-header')}>
-                            <FontAwesomeIcon icon={faBell} className={cx('noti-err-header-icon')} />
-                            <span>Error</span>
+                <div className={cx('noti-err-wrapper', 'noti')}>
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        role="alert"
+                        style={{ padding: '2rem 3rem' }}
+                    >
+                        <div className={cx('noti')}>
+                            <strong>Tài khoản hoặc mật khẩu sai. Đăng nhập không thành công!</strong>
+                            <br></br>
+                            <button
+                                className={cx('btn', 'btn-warning')}
+                                style={{ fontSize: '16px', margin: '1rem' }}
+                                onClick={() => setErr(false)}
+                            >
+                                <strong>OK</strong>
+                            </button>
                         </div>
-                        <button className={cx('noti-err-header-btn')} onClick={() => setErr(false)}>
-                            OK
-                        </button>
                     </div>
                 </div>
             ) : (

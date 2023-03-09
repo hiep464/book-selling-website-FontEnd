@@ -1,5 +1,7 @@
+import { useQueryClient, useQuery } from 'react-query';
 import { useFetch, usePost } from '../utils/useReactQuery';
 import { apiBaseUrl, getApiResponseData } from './constants';
+import axios from 'axios';
 
 export const useGetBooks = (paginate, filter) => {
     const { page, limit } = paginate;
@@ -29,7 +31,12 @@ export const useGetBookCategories = () => {
     return result?.data;
 };
 
-export const useAddBookToCart = (bookId, userId) =>{
-    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {},() => {});
+export const useAddBookToCart = (bookId, userId) => {
+    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {}, () => {});
     return result;
-}
+};
+
+export const useSearchBook = (title) => {
+    const result = useFetch(`${apiBaseUrl}/books/`, { title }, {});
+    return getApiResponseData(result);
+};
