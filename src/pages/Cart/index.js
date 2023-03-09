@@ -6,6 +6,8 @@ import { AuthContext } from '../../context/AuthContext';
 // import { useGetBookInCart } from '../../api/useBook';
 import * as cartService from '../../apiServices/cartService';
 import * as addressService from '../../apiServices/adressService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -19,57 +21,58 @@ function Cart() {
     const [district, setDistrict] = useState(false);
     const [wards, setWards] = useState([]);
     const [ward, setWard] = useState(false);
+    const [cityId, setCityId] = useState(1);
+    const [noti, setNoti] = useState(false);
 
-    const [all, setAll] = useState(false);
-    
     // const cart = useGetBookInCart(state['userId']);
     // const cartList = cart?.data;
     // console.log(cart);
-    useEffect(() =>{
+    useEffect(() => {
         const fetchApi = async () => {
             const result = await cartService.getCart(state['userId']);
             // console.log(result);
             setCartList(result);
-        }   
+        };
         fetchApi();
-    },[])
+    }, []);
     useEffect(() => {
         cartList?.map((item) => {
-            setTotal(total + (item?.book?.price * item?.quantity));
-        })
-    }, [cartList])
+            setTotal(total + item?.book?.price * item?.quantity);
+        });
+    }, [cartList]);
 
     useEffect(() => {
         const fetchApi = async () => {
             const result = await addressService.getCities();
             setCities(result);
-        }   
+        };
         fetchApi();
-    }, [])
+    }, []);
 
-    const handleChangeCity = event => {
+    const handleChangeCity = (event) => {
         console.log(event.target.value);
+        setCityId(parseInt(event.target.value));
         const fetchApi = async () => {
-            const result = await addressService.getDistrics(1);
-            console.log(result)
+            const result = await addressService.getDistrics(parseInt(event.target.value));
+            console.log(result);
             setDistricts(result);
-        }
+        };
         fetchApi();
         setCity(true);
     };
 
-    const handleChangeDistrict = event => {
+    const handleChangeDistrict = (event) => {
         console.log(event.target.value);
         const fetchApi = async () => {
-            const result = await addressService.getWards(1, 1);
-            console.log(result)
+            const result = await addressService.getWards(cityId, parseInt(event.target.value));
+            console.log(result);
             setWards(result);
-        }
+        };
         fetchApi();
         setDistrict(true);
     };
 
-    const handleChangeWard = event => {
+    const handleChangeWard = (event) => {
         console.log(event.target.value);
         setWard(true);
     };
@@ -115,41 +118,68 @@ function Cart() {
                     <div className={cx('select-address')}>
                         <select class="form-select" aria-label="Default select example" onChange={handleChangeCity}>
                             <option selected>Chọn thành phố</option>
-                            {
-                                cities.map((item) => (
-                                    <option value={item?.code} key={item?.code}>{item?.name}</option>
-                                ))
-                            }
+                            {cities.map((item) => (
+                                <option value={item?.code} key={item?.code}>
+                                    {item?.name}
+                                </option>
+                            ))}
                         </select>
                         <select class="form-select" aria-label="Default select example" onChange={handleChangeDistrict}>
                             <option selected>Chọn quận huyện</option>
                             {/* <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option> */}
-                            {
-                                districts.map((item) => (
-                                    <option value={item?.code} key={item?.code}>{item?.name}</option>
-                                ))
-                            }
+                            {districts.map((item) => (
+                                <option value={item?.code} key={item?.code}>
+                                    {item?.name_with_type}
+                                </option>
+                            ))}
                         </select>
                         <select class="form-select" aria-label="Default select example" onChange={handleChangeWard}>
                             <option selected>Chọn phường xã</option>
-                            {
-                                wards.map((item) => (
-                                    <option value={item?.code} key={item?.code}>{item?.name}</option>
-                                ))
-                            }
+                            {wards.map((item) => (
+                                <option value={item?.code} key={item?.code}>
+                                    {item?.name_with_type}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className={cx('cart-right-header', 'flex')}>
                         <span>Phí ship:</span>
-                        <span>{(city && district && ward) ? '30000' : '0'} đ</span>
+                        <span>{city && district && ward ? '30000' : '0'} đ</span>
                     </div>
                     <div className={cx('cart-right-body', 'flex')}>
                         <span>Tống số tiền</span>
-                        <span>{(city && district && ward) ? total / 2 + 30000 : ''}</span>
+                        <span>{city && district && ward ? total / 2 + 30000 : ''}</span>
                     </div>
-                    <button className={cx('btn')}>THANH TOÁN</button>
+                    <button
+                        className={cx('btn', city && district && ward ? 'active' : '')}
+                        onClick={
+                            city && district && ward
+                                ? () => {
+                                      setNoti(true);
+                                      setTimeout(() => {
+                                          setNoti(false);
+                                      }, 1000);
+                                  }
+                                : () => {}
+                        }
+                    >
+                        THANH TOÁN
+                    </button>
+                    {noti ? (
+                        <div className={cx('add-cart-noti-wrap')}>
+                            <div className={cx('add-cart-noti')}>
+                                <FontAwesomeIcon
+                                    className={cx('add-cart-noti-icon')}
+                                    icon={faCircleCheck}
+                                ></FontAwesomeIcon>
+                                Thanh toan thành công
+                            </div>
+                        </div>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         </div>
