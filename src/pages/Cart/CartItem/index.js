@@ -49,7 +49,7 @@ function CartItem({ quantity, userId, bookId }) {
                         </div>
                         <div className={cx('product-info-body')}>
                             <span className={cx('title')}>{book?.title}</span>
-                            <span>{book?.price}</span>
+                            <span>{book?.price} VND</span>
                         </div>
                     </div>
                 </Link>
@@ -62,7 +62,7 @@ function CartItem({ quantity, userId, bookId }) {
                 </div>
             </div>
             <div style={{ width: '146px' }} className={cx('center')}>
-                <span>{book?.price * quantityBook}</span>
+                <span>{book?.price * quantityBook} VND</span>
             </div>
             <div className={cx('center', 'icon')}>
                 <FontAwesomeIcon icon={faTrashCan} onClick={removeItem} />

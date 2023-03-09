@@ -40,7 +40,7 @@ function Cart() {
             setCartList(result);
         };
         fetchApi();
-    }, []);
+    }, [cartService.getCart(state['userId'])]);
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -110,7 +110,7 @@ function Cart() {
                 <div className={cx('cart-right')}>
                     <div className={cx('cart-right-header', 'flex')}>
                         <span>Thành tiền</span>
-                        <span>{total}</span>
+                        <span>{total} VND</span>
                     </div>
 
                     <div className={cx('address-confirm')}>
@@ -147,7 +147,7 @@ function Cart() {
                     </div>
                     <div className={cx('cart-right-header', 'flex')}>
                         <span>Phí ship:</span>
-                        <span>{city && district && ward ? '30000' : '0'} đ</span>
+                        <span>{city && district && ward ? '30000' : '0'} VND</span>
                     </div>
                     <div className={cx('cart-right-body', 'flex')}>
                         <span>Tống số tiền</span>

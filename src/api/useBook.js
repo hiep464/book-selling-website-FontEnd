@@ -31,9 +31,12 @@ export const useGetBookCategories = () => {
     return result?.data;
 };
 
-export const useAddBookToCart = (bookId, userId) =>{
-    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {},() => {});
-    const queryClient = useQueryClient();
-    queryClient.invalidateQueries({ queryKey: [`https://web-pj-be.fly.dev/api/${userId}/books/${bookId}`,{}] });
+export const useAddBookToCart = (bookId, userId) => {
+    const result = usePost(`${apiBaseUrl}/users/${userId}/cart/${bookId}`, {}, () => {});
     return result;
-}
+};
+
+export const useSearchBook = (title) => {
+    const result = useFetch(`${apiBaseUrl}/books/`, { title }, {});
+    return getApiResponseData(result);
+};

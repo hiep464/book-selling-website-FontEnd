@@ -408,3 +408,9 @@
         height: 14px;
     }
 }
+
+.hover-gray {
+    &:hover {
+        background-color: #ccc;
+    }
+}

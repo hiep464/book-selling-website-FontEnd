@@ -97,7 +97,6 @@ function BookInfo(props) {
         width,
         numOfPages,
     } = props;
-    // console.log(rating);
     const img = coverUrl;
     // require('../../assets/images/book_detail/image_208345.jpg')
 
@@ -186,7 +185,12 @@ function BookInfo(props) {
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} />
                             <FontAwesomeIcon className={cx('color')} icon={faStar} /> */}
-                            <StarRatings rating={rating || 0} starRatedColor="#ffc107" starDimension="20px" starSpacing="2px" />
+                            <StarRatings
+                                rating={rating || 0}
+                                starRatedColor="#ffc107"
+                                starDimension="20px"
+                                starSpacing="2px"
+                            />
                         </div>
 
                         <div className={cx('bookdetail-price')}>{price} đ</div>
@@ -423,6 +427,7 @@ BookFeedback.defaultProps = {
 
 BookInfo.defaultProps = {
     title: 'How Psychology Works - Hiểu Hết Về Tâm Lý Học',
+    rating: 0,
     author: 'Jo Hemmings',
     category: 'A',
     code: '123',
