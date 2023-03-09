@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/AuthContext';
 import * as cartService from '../../apiServices/cartService';
 import * as addressService from '../../apiServices/adressService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faCircleCheck, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck} from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -31,15 +31,16 @@ function Cart() {
         const fetchApi = async () => {
             const result = await cartService.getCart(state['userId']);
             // console.log(result);
+            let sum = 0;
+            result?.map((item) => {
+                sum = sum + item?.book?.price * item?.quantity;
+                return sum;
+            });
+            setTotal(sum);
             setCartList(result);
         };
         fetchApi();
     }, []);
-    useEffect(() => {
-        cartList?.map((item) => {
-            setTotal(total + item?.book?.price * item?.quantity);
-        });
-    }, [cartList]);
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -109,7 +110,7 @@ function Cart() {
                 <div className={cx('cart-right')}>
                     <div className={cx('cart-right-header', 'flex')}>
                         <span>Thành tiền</span>
-                        <span>{total / 2}</span>
+                        <span>{total}</span>
                     </div>
 
                     <div className={cx('address-confirm')}>
@@ -150,7 +151,7 @@ function Cart() {
                     </div>
                     <div className={cx('cart-right-body', 'flex')}>
                         <span>Tống số tiền</span>
-                        <span>{city && district && ward ? total / 2 + 30000 : ''}</span>
+                        <span>{city && district && ward ? total + 30000 : ''}</span>
                     </div>
                     <button
                         className={cx('btn', city && district && ward ? 'active' : '')}
